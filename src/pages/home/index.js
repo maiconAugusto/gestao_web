@@ -79,7 +79,7 @@ export default function Home () {
             <SideMenu option={'home'} />
             <div style={{display: 'flex' , justifyContent: 'flex-end', padding: 8}}>
                 <FontAwesomeIcon style={{marginRight: 4}} icon={faUser} />
-                <small style={{marginRight: 6}}>Usúario: {user.name}</small>
+                <small style={{marginRight: 6}}>Usuário: {user.name}</small>
             </div>
             <Container>
                     {loading === true ? (
