@@ -32,7 +32,7 @@ export default function Remove () {
         .then((response) => {
             toast.success(`${response.data.data}!`)
             const removeElement = collaborators.filter(element => {
-                return element.id !== id
+                return element.collaborator.id !== id
             })
             setCollaborators(removeElement);
         })
@@ -53,8 +53,8 @@ export default function Remove () {
                     {collaborators.map(element => {
                         return(
                             <div key={element.id} style={{display: "flex", justifyContent: 'space-between', alignItems: 'center', marginTop: 16}}>
-                                <li style={{width: 350}}>{element.name}</li>
-                                <IconButton aria-label="delete" onClick={() => Remove(element.id)}>
+                                <li style={{width: 350}}>{element.collaborator.name}</li>
+                                <IconButton aria-label="delete" onClick={() => Remove(element.collaborator.id)}>
                                     <DeleteIcon color="secondary"/>
                                 </IconButton>
                             </div>

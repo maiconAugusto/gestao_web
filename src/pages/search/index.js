@@ -12,10 +12,8 @@ import 'moment/locale/pt-br'
 
 export default function Search () {
 
-  var birthDay = "1990/03/19";
-  var age = moment(new Date()).diff(moment(birthDay),'years',true);
     const [lgShow, setLgShow] = useState(false);
-    const [data, setData] = useState({});
+    const [data, setData] = useState({collaborator: ''});
     const [collaborators, setCollaborators] = useState([]);
 
     async function GetCollaborators (name) {
@@ -29,44 +27,45 @@ export default function Search () {
       })
       .then((response) => {
           setCollaborators(response.data.data);
+          console.log(response.data)
       })
   }
     function ViewUser () {
+      console.log(data.collaborator)
         return (
           <Modal
             size="lg"
             show={lgShow}
             onHide={() => {
               setLgShow(false)
-              setData({})
+              setData({collaborator: ''})
             }}
             aria-labelledby="example-modal-sizes-title-lg"
           >
-            {console.log(data)}
             <Modal.Header closeButton>
               <Modal.Title style={{fontSize: 14}} id="example-modal-sizes-title-lg">
-                {data.name}
+                {data ===  undefined? 'Não informado' : data.collaborator.name}
               </Modal.Title>
             </Modal.Header>
             <Modal.Body>
                 <div style={{display: 'flex', flexDirection: 'column'}}>
-                    <small>Idade: {data.age === '' ? 'Não informado' : Math.floor(moment(new Date()).diff(moment(data.age),'years',true))}</small>
+                    <small>Idade: {data.collaborator.age === '' ? 'Não informado' : Math.floor(moment(new Date()).diff(moment(data.collaborator.age),'years',true))}</small>
                     <br/>
-                    <small>Telefone: {data.phone === '' ? 'Não informado' : data.phone}</small>
-                    <small>WhatsApp: {data.phone === '' ? 'Não informado' : data.whatsApp}</small>
+                    <small>Telefone: {data.collaborator.phone === '' ? 'Não informado' : data.collaborator.phone}</small>
+                    <small>WhatsApp: {data.collaborator.phone === '' ? 'Não informado' : data.collaborator.whatsApp}</small>
                     <br/>
-                    <small>Bairro: {data.neighborhood === '' ? 'Não informado' : data.neighborhood}</small>
-                    <small>Rua: {data.street === '' ? 'Não informado' : data.street}</small>
-                    <small>Número: {data.houseNumber === '' ? 'Não informado' : data.houseNumber}</small>
+                    <small>Bairro: {data.collaborator.neighborhood === '' ? 'Não informado' : data.collaborator.neighborhood}</small>
+                    <small>Rua: {data.collaborator.street === '' ? 'Não informado' : data.collaborator.street}</small>
+                    <small>Número: {data.collaborator.houseNumber === '' ? 'Não informado' : data.collaborator.houseNumber}</small>
                     <br/>
-                    <small>Colaborador: </small>
-                    <small>Descrição: {data.description === '' ? 'Não informado' : data.description}</small>
+                    <small style={{textTransform: 'capitalize'}}>Colaborador: {data.categories}</small>
+                    <small>Descrição: {data.collaborator.description === '' ? 'Não informado' : data.collaborator.description}</small>
                     <br/>
-                    <small>Facebook: {data.instagram === '' ? 'Não informado' : (
-                      <a target="_blank" href={data.facebook}>click</a>
+                    <small>Facebook: {data.collaborator.instagram === '' ? 'Não informado' : (
+                      <a target="_blank" href={data.collaborator.facebook}>click</a>
                     )}</small>
                     <small>Instagran: {data.instagram === '' ? 'Não informado' : (
-                      <a target="_blank" href={data.instagram}>click</a>
+                      <a target="_blank" href={data.collaborator.instagram}>click</a>
                     )}</small>
                 </div>
             </Modal.Body>
@@ -94,7 +93,7 @@ export default function Search () {
                             setLgShow(true)
                             setData(element)
                           }}>
-                            {element.name}
+                            {element.collaborator.name}
                           </ListGroup.Item>
                         </div>
                       )

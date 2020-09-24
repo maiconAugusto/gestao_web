@@ -50,7 +50,7 @@ export default function Login () {
         <Container>
             <ContainerForm>
                 <div style={{display: 'flex', justifyContent: 'center'}}>
-                    <Image style={{marginBottom: 20}} src={Logo} width={60} />
+                    <Image style={{marginBottom: 20}} src={Logo} width={60} height={60} />
                 </div>
                 <input placeholder="E-mail" value={email} onChange={event => setEmail(event.target.value)} />
                 <input placeholder="Senha" value={password} type="password" onChange={event => setPassword(event.target.value)} />

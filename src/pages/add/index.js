@@ -153,7 +153,7 @@ export default function Add () {
                         <Form.Group style={{padding: 5}} controlId="formGridPassword">
                             <div style={{display: 'flex', flexDirection: 'column'}}>
                                 <Form.Label className="none" style={{fontSize: 14, marginBottom: 0}}>Número</Form.Label>
-                                <InputMask mask="9999999" placeholder="Número da casa" onChange={event => setHouseNumber(event.target.value)} />
+                                <Form.Control type="text" placeholder="Número da casa" onChange={event => setHouseNumber(event.target.value)} />
                             </div>
                         </Form.Group>
                     </Form.Row>

@@ -118,9 +118,9 @@ export default function Home () {
                                 </Card>
                                 <Card style={{ width: '18rem', margin:6  }}>
                                     <Card.Body>
-                                        <Card.Title style={{fontSize: 14}}>Outros:</Card.Title>
+                                        <Card.Title style={{fontSize: 14}}>Total de pacientes:</Card.Title>
                                         <Card.Text style={{fontSize: 14}}>
-                                        Total: {_outros}
+                                        Total: {_pacinete}
                                         </Card.Text>
                                     </Card.Body>
                                 </Card>
@@ -128,9 +128,9 @@ export default function Home () {
                             <div className="tag" style={{display: 'flex'}}>
                                 <Card style={{ width: '18rem', margin:6  }}>
                                     <Card.Body>
-                                        <Card.Title style={{fontSize: 14}}>Total de pacientes:</Card.Title>
+                                        <Card.Title style={{fontSize: 14}}>Outros:</Card.Title>
                                         <Card.Text style={{fontSize: 14}}>
-                                        Total: {_pacinete}
+                                        Total: {_outros}
                                         </Card.Text>
                                     </Card.Body>
                                 </Card>
