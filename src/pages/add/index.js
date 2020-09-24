@@ -77,8 +77,8 @@ export default function Add () {
             toast.success("Adicionado com sucesso!");
             setLoading(false);
         })
-        .catch(() => {
-            toast.error("Ops, algo deu errado, tente novamente!");
+        .catch((error) => {
+            toast.error("Ops, Este CPF ou RG já consta em nossa base de dados!!");
             setLoading(false);
         })
     }
