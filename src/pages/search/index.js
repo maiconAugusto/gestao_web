@@ -49,6 +49,9 @@ export default function Search () {
             </Modal.Header>
             <Modal.Body>
                 <div style={{display: 'flex', flexDirection: 'column'}}>
+                    <small>Cpf: {data.collaborator.cpf === '' ? 'Não informado' : data.collaborator.cpf}</small>
+                    <small>Rg: {data.collaborator.rg === '' ? 'Não informado' : data.collaborator.rg}</small>
+                    <br/>
                     <small>Idade: {data.collaborator.age === '' ? 'Não informado' : Math.floor(moment(new Date()).diff(moment(data.collaborator.age),'years',true))}</small>
                     <br/>
                     <small>Telefone: {data.collaborator.phone === '' ? 'Não informado' : data.collaborator.phone}</small>
