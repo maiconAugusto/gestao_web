@@ -7,8 +7,9 @@ export default function RouterWrapp({
     isPrivate,
     ...rest
 }) {
+    let verify = localStorage.getItem('@email') === null ? false : true;
     let logged = useSelector(state => state.LOGIN.logged)
-    const signed = logged;
+    const signed = logged || verify;
 
     if(!signed && isPrivate){
         return <Redirect to="/" />

@@ -10,7 +10,13 @@ export default function SideMenu (props) {
     return (
         <SideNav
             onSelect={(selected) => {
-                history.push(selected);
+                if (selected === '/') {
+                    localStorage.removeItem('@email');
+                    history.push(selected);
+                }
+                else {
+                    history.push(selected);
+                }
             }}
         >
             <SideNav.Toggle />

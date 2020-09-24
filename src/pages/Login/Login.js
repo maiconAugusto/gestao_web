@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import {Container, ContainerForm} from './style';
 import { useHistory } from "react-router-dom";
 import { ToastContainer, toast  } from 'react-toastify';
@@ -12,10 +12,15 @@ import Logo from '../../assets/gerenciamento-de-equipe.png';
 
 export default function Login () {
 
-    const dispatch = useDispatch();
+    useEffect(() => {
+        if (localStorage.getItem('@email') !== null){
+            return history.push("/home");
+        }
+    }, []);
 
+    const dispatch = useDispatch();
     let history = useHistory()
-    const [email, setEmail] = useState('');
+    const [email, setEmail] = useState(localStorage.getItem('@loginEmail') === null ? '' : localStorage.getItem('@loginEmail'));
     const [password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
 
@@ -30,6 +35,8 @@ export default function Login () {
         .then((response) => {
             setLoading(false);
             dispatch({type: '@LOGIN', payload: response.data.user});
+            localStorage.setItem('@loginEmail', response.data.user.email)
+            localStorage.setItem('@email', JSON.stringify(response.data.user))
             history.push("/home");
         })
         .catch((err)=> {

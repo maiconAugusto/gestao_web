@@ -199,7 +199,7 @@ export default function Add () {
                             <Form.Control style={{width: 300}} as="textarea" rows="2" onChange={event => setDescription(event.target.value)} />
                         </Form.Group>
                     </Form.Row>
-                    <Button variant="success" onClick={() => sendToApi()}>
+                    <Button style={{marginTop: -16}} variant="success" onClick={() => sendToApi()}>
                         Salvar
                     </Button>
                     </Form>

@@ -9,7 +9,7 @@ import {useSelector} from 'react-redux';
 
 export default function Home () {
 
-    let user  = useSelector(state => state.LOGIN.data)
+    let user  = JSON.parse(localStorage.getItem('@email'));
 
     const [categories, setCategories] = useState([]);
     const [total , settotal] = useState('0');
