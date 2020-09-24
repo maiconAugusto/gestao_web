@@ -1,4 +1,4 @@
 import axios from 'axios';
 
-const api = axios.create({baseURL: 'http://178.128.145.152:8080'});
+const api = axios.create({baseURL: 'https://api-prod-gestao.herokuapp.com'});
 export default api;
