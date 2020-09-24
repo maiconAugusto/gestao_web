@@ -64,7 +64,7 @@ export default function Search () {
                     <small>Facebook: {data.collaborator.instagram === '' ? 'Não informado' : (
                       <a target="_blank" href={data.collaborator.facebook}>click</a>
                     )}</small>
-                    <small>Instagran: {data.instagram === '' ? 'Não informado' : (
+                    <small>Instagran: {data.collaborator.instagram === '' ? 'Não informado' : (
                       <a target="_blank" href={data.collaborator.instagram}>click</a>
                     )}</small>
                 </div>
