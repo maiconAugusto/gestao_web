@@ -7,6 +7,10 @@ import Add from './pages/add/index';
 import Remove from './pages/remove/index';
 import Search from './pages/search/index';
 import Setup from './pages/setup/index';
+import Password from './pages/password/password';
+import Avanced from './pages/avanced/avanced';
+import List from './pages/list/list';
+
 
 export default function Routes () {
     return (
@@ -18,6 +22,9 @@ export default function Routes () {
                 <Route path="/remove" component={Remove} isPrivate />
                 <Route path="/search" component={Search} isPrivate />
                 <Route path="/setup" component={Setup} isPrivate />
+                <Route path="/password" component={Password} isPrivate />
+                <Route path="/avanced" component={Avanced} isPrivate />
+                <Route path="/list" component={List} isPrivate />
             </Switch>
         </BrowserRouter>
     );

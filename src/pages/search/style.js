@@ -30,4 +30,11 @@ export const Container = styled.form`
     li {
         font-size: 14px;
     }
+    select {
+        border: 1px solid #009029; 
+        border-radius: 4px;
+    }
+    textarea {
+        border: 1px solid #009029;
+    }
 `

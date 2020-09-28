@@ -76,10 +76,40 @@ export default function Add () {
         .then(() => {
             toast.success("Adicionado com sucesso!");
             setLoading(false);
+            setName('')
+            setAge('')
+            setRg('')
+            setCpf('')
+            setWhatsApp('')
+            setPhone('')
+            setNeighborhood('')
+            setStreet('')
+            setHouseNumber('')
+            setComplement('')
+            setDescription('')
+            setReference('')
+            setIdCategories('')
+            setFacebook('')
+            setInstagram('')
         })
         .catch((error) => {
             toast.error("Ops, Este CPF ou RG já consta em nossa base de dados!!");
             setLoading(false);
+            setName('')
+            setAge('')
+            setRg('')
+            setCpf('')
+            setWhatsApp('')
+            setPhone('')
+            setNeighborhood('')
+            setStreet('')
+            setHouseNumber('')
+            setComplement('')
+            setDescription('')
+            setReference('')
+            setIdCategories('')
+            setFacebook('')
+            setInstagram('')
         })
     }
 
