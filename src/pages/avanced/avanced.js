@@ -16,7 +16,7 @@ export default function Avanced () {
     const [ password, setPassword] = useState('');
     const [loading, setLoading] = useState(false);
     const [ name, setName] = useState('');
-
+ 
     async function send(event){
         event.preventDefault()
         if (name === ''){
