@@ -9,21 +9,37 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { ToastContainer, toast  } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import api from '../../services/api';
+import {useDispatch} from 'react-redux';
+import { useHistory } from "react-router-dom";
 
 export default function Remove () {
+    const dispatch = useDispatch();
+    let history = useHistory()
     const [collaborators, setCollaborators] = useState([]);
-
+    let token = localStorage.getItem('@token')
     async function GetCollaborators (name) {
         if (name === '') {
             return setCollaborators([]);
         }
         await api.get('/query', {
+            headers:{
+                'Authorization': `Bearer ${token}`,
+            },
             params: {
                 name: name,
             }
         })
         .then((response) => {
             setCollaborators(response.data.data);
+        })
+        .catch((resp) => {
+            toast.error("Sua conexão expirou, faça o login novamente!")
+            localStorage.removeItem('@email')
+            localStorage.removeItem('@loginEmail')
+            localStorage.removeItem('@token')
+            setTimeout(()=> {
+                history.push('/')
+            },2000)
         })
     }
 

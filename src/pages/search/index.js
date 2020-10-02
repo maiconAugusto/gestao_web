@@ -17,11 +17,12 @@ import { ToastContainer, toast  } from 'react-toastify';
 import InputMask from "react-input-mask";
 import IconButton from '@material-ui/core/IconButton';
 import Edit from '@material-ui/icons/Edit';
-import Image from 'react-bootstrap/Image'
-import Col from 'react-bootstrap/Col'
+import {useDispatch} from 'react-redux';
+import { useHistory } from "react-router-dom";
 
 export default function Search () {
-
+    const dispatch = useDispatch();
+    let history = useHistory()
     const [lgShow, setLgShow] = useState(false);
     const [editShow, setEditShow] = useState(false);
     const [data, setData] = useState({collaborator: ''});
@@ -45,7 +46,7 @@ export default function Search () {
     const [facebook, setFacebook] = useState('');
     const [instagram, setInstagram] = useState('');
     const [loading, setLoading] = useState(false);
-
+    let token = localStorage.getItem('@token')
     const [categories, setCategories] = useState([]);
 
     useEffect(()=> {
@@ -57,6 +58,16 @@ export default function Search () {
             .then((response)=> {
                 setCategories(response.data.data);
             })
+            .catch(()=> {
+              setLoading(false);
+              toast.error("Sua conexão expirou, faça o login novamente!")
+              localStorage.removeItem('@email')
+              localStorage.removeItem('@loginEmail')
+              localStorage.removeItem('@token')
+              setTimeout(()=> {
+                  history.push('/')
+              },2000)
+            })
     }
 
     async function GetCollaborators (name) {
@@ -64,12 +75,25 @@ export default function Search () {
           return setCollaborators([]);
       }
       await api.get('/query', {
+        headers:{
+          'Authorization': `Bearer ${token}`,
+        },
           params: {
               name: name,
           }
       })
       .then((response) => {
           setCollaborators(response.data.data);
+      })
+      .catch((resp)=> {
+        setLoading(false);
+        toast.error("Sua conexão expirou, faça o login novamente!")
+        localStorage.removeItem('@email')
+        localStorage.removeItem('@loginEmail')
+        localStorage.removeItem('@token')
+        setTimeout(()=> {
+            history.push('/')
+        },2000)
       })
     }
     async function sendApi(){

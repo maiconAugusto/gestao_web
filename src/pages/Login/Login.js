@@ -13,6 +13,7 @@ import Logo from '../../assets/gerenciamento-de-equipe.png';
 export default function Login () {
 
     useEffect(() => {
+        dispatch({type: '@LOGIN', payload: null});
         if (localStorage.getItem('@email') !== null){
             return history.push("/home");
         }
@@ -37,6 +38,7 @@ export default function Login () {
             dispatch({type: '@LOGIN', payload: response.data.user});
             localStorage.setItem('@loginEmail', response.data.user.email)
             localStorage.setItem('@email', JSON.stringify(response.data.user))
+            localStorage.setItem('@token',response.data.token)
             history.push("/home");
         })
         .catch((err)=> {

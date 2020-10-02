@@ -11,10 +11,13 @@ import { ToastContainer, toast  } from 'react-toastify';
 import InputMask from "react-input-mask";
 import 'react-toastify/dist/ReactToastify.css';
 import api from '../../services/api';
+import {useDispatch} from 'react-redux';
+import { useHistory } from "react-router-dom";
 
 export default function Add () {
     const [categories, setCategories] = useState([]);
-
+    const dispatch = useDispatch();
+    let history = useHistory()
     const [name, setName] = useState('');
     const [age, setAge] = useState('');
     const [rg, setRg] = useState('');
@@ -33,15 +36,29 @@ export default function Add () {
     const [facebook, setFacebook] = useState('');
     const [instagram, setInstagram] = useState('');
     const [loading, setLoading] = useState(false);
-
+    let token = localStorage.getItem('@token')
     useEffect(()=> {
         getCategories();
     }, [])
 
     async function getCategories() {
-        await api.get('/categories')
+        await api.get('/categories', {
+            headers:{
+                'Authorization': `Bearer ${token}`,
+            },
+        })
             .then((response)=> {
                 setCategories(response.data.data);
+            })
+            .catch((resp) => {
+                setLoading(false);
+                toast.error("Sua conexão expirou, faça o login novamente!")
+                localStorage.removeItem('@email')
+                localStorage.removeItem('@loginEmail')
+                localStorage.removeItem('@token')
+                setTimeout(()=> {
+                    history.push('/')
+                },2000)
             })
     }
 

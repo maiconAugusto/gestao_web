@@ -12,8 +12,12 @@ import Lists from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import ListItemText from '@material-ui/core/ListItemText';
 import Typography from '@material-ui/core/Typography';
+import {useDispatch} from 'react-redux';
+import { useHistory } from "react-router-dom";
 
 export default function List () {
+    const dispatch = useDispatch();
+    let history = useHistory()
     useEffect(() => {
         GetCategories();
     }, [])
@@ -21,10 +25,15 @@ export default function List () {
     const [list, setList] = useState([]);
     const [loading ,setLoading]= useState(false);
     const [loadingFilter, setLoadingFilter] = useState(false);
+    let token = localStorage.getItem('@token')
     
     async function GetCategories () {
         setLoadingFilter(true);
-        await api.get('/categories')
+        await api.get('/categories',{
+            headers:{
+                'Authorization': `Bearer ${token}`,
+            },
+        })
          .then((response) => {
              setCategories(response.data.data);
              let aux = [];
@@ -40,6 +49,13 @@ export default function List () {
             setLoadingFilter(false);
          })
          .catch(()=> {
+            toast.error("Sua conexão expirou, faça o login novamente!")
+            localStorage.removeItem('@email')
+            localStorage.removeItem('@loginEmail')
+            localStorage.removeItem('@token')
+            setTimeout(()=> {
+                history.push('/')
+            },2000)
             setLoadingFilter(true);
          })
     }
@@ -68,17 +84,29 @@ export default function List () {
         }
         setLoading(true);
         await api.get('/list-collaborators', {
+            headers:{
+                'Authorization': `Bearer ${token}`,
+            },
             params: {
                 filter: aux
             }
         })
             .then((response)=> {
+                if (response.data.data.length === 0) {
+                    toast.warning("Nao encontramos resultados")
+                }
                 setList(response.data.data)
                 setLoading(false)
             })
-            .catch(()=> {
-                toast.warn("Algo deu errado, tente novamente")
-                setLoading(false)
+            .catch((resp)=> {
+                setLoading(false);
+                toast.error("Sua conexão expirou, faça o login novamente!")
+                localStorage.removeItem('@email')
+                localStorage.removeItem('@loginEmail')
+                localStorage.removeItem('@token')
+                setTimeout(()=> {
+                    history.push('/')
+                },2000)
             })
     }
 
@@ -97,14 +125,16 @@ export default function List () {
                         <small style={{marginLeft: 8}}>Carregando...</small>
                     </div>
                 ) : (
-                    categories.map(element => {
+                    <div style={{display: 'flex', alignItems: 'center'}}>
+                        {categories.map(element => {
                         return (
-                        <div style={{display: 'flex', alignItems: 'center' }}>
+                        <div style={{display: 'flex', flexDirection: 'row', height: 50, width: 110, alignItems: 'center'}}>
                             <input type="checkbox" id="scales" onChange={()=> selectCheck(element.id)}  checked={element.isSelect} />
-                            <label style={{paddingTop: 10, marginLeft: 4}}>{element.categories}</label>
+                            <label style={{ marginLeft: 8, marginTop: 8, fontSize: 14}}>{element.categories}</label>
                         </div>
                         )
-                    })
+                      })}
+                    </div>
                 )}
             </div>
             {loading === true  ? (
