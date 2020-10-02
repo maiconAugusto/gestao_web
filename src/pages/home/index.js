@@ -62,10 +62,10 @@ export default function Home () {
                     if (element.categories === 'Contratado RFCC') {
                         contratadoRFCC = element.id
                     }
-                    if (element.categories === 'Contratado Política') {
+                    if (element.categories === 'Contratado Político') {
                         contratadoPolitica = element.id
                     }
-                    if (element.categories === 'Voluntário Política') {
+                    if (element.categories === 'Voluntário Político') {
                         voluntarioPolitica = element.id
                     }
                     if (element.categories === 'Voluntário RFCC') {
@@ -80,14 +80,13 @@ export default function Home () {
             })
             .catch((error) => {
                 setLoading(false);
-                    toast.error("Sua conexão expirou, faça o login novamente!")
-                    localStorage.removeItem('@email')
-                    localStorage.removeItem('@loginEmail')
-                    localStorage.removeItem('@token')
-                    setTimeout(()=> {
-                        dispatch({type: '@LOGIN', payload: null});
-                        history.push('/')
-                    },2000)
+                toast.error("Sua conexão expirou, faça o login novamente!")
+                localStorage.removeItem('@email')
+                localStorage.removeItem('@loginEmail')
+                localStorage.removeItem('@token')
+                setTimeout(()=> {
+                    history.push('/')
+                },2000)
             })
     }
     async function getTotal () {
