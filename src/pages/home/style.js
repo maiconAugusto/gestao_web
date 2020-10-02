@@ -6,7 +6,7 @@ export const Container = styled.div`
     align-items: center;
     flex: 1;
     height: 500px;
-    @media (max-width: 750px) 
+    @media (max-width: 900px) 
     {
     .tag
         {
@@ -14,8 +14,20 @@ export const Container = styled.div`
             flex-direction: column;
         }
     }
+    }
 `
+
 export const Div = styled.div`
     display: flex;
     flex-direction: column;
+    height: 100%;
+    @media (max-width: 900px) 
+    {
+    .minor
+        {
+            width: 10rem;
+        }
+    }
+    }
+
 `

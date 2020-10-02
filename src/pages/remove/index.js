@@ -62,7 +62,7 @@ export default function Remove () {
                 <FontAwesomeIcon icon={faUserTimes} />
                 <strong style={{marginLeft: 10}}>REMOVER COLABORADOR</strong>
               </div>
-                <input type="text" style={{width: 400}} onChange={(event) => GetCollaborators(event.target.value)} placeholder="Nome" />
+                <input className="minor" type="text" style={{width: 400}} onChange={(event) => GetCollaborators(event.target.value)} placeholder="Nome" />
                 <ul>
                     {collaborators.map(element => {
                         return(

@@ -138,7 +138,7 @@ export default function Home () {
                     ) : (
                         <Div>
                             <div className="tag" style={{display: 'flex', marginBottom: 2}}>
-                                <Card style={{ width: '18rem', margin:6 }}>
+                                <Card className="minor" style={{ width: '18rem', margin:6 }}>
                                     <Card.Body>
                                         <Card.Title style={{fontSize: 14}}>Total de colaboradores:</Card.Title>
                                         <Card.Text style={{fontSize: 14}}>
@@ -146,7 +146,7 @@ export default function Home () {
                                         </Card.Text>
                                     </Card.Body>
                                 </Card>
-                                <Card style={{ width: '18rem', margin:6  }}>
+                                <Card className="minor" style={{ width: '18rem', margin:6  }}>
                                     <Card.Body>
                                         <Card.Title style={{fontSize: 14}}>Total de contratados(outros):</Card.Title>
                                         <Card.Text style={{fontSize: 14}}>
@@ -156,7 +156,7 @@ export default function Home () {
                                 </Card>
                             </div>
                             <div className="tag" style={{display: 'flex', marginBottom: 2}}>
-                                <Card style={{ width: '18rem', margin:6 }}>
+                                <Card className="minor" style={{ width: '18rem', margin:6 }}>
                                     <Card.Body>
                                         <Card.Title style={{fontSize: 14}}>Total de contratados políticos:</Card.Title>
                                         <Card.Text style={{fontSize: 14}}>
@@ -164,7 +164,7 @@ export default function Home () {
                                         </Card.Text>
                                     </Card.Body>
                                 </Card>
-                                <Card style={{ width: '18rem', margin:6  }}>
+                                <Card className="minor" style={{ width: '18rem', margin:6  }}>
                                     <Card.Body>
                                         <Card.Title style={{fontSize: 14}}>Total de contratados RFCC:</Card.Title>
                                         <Card.Text style={{fontSize: 14}}>
@@ -174,7 +174,7 @@ export default function Home () {
                                 </Card>
                             </div>
                             <div className="tag" style={{display: 'flex', marginBottom: 2}}>
-                                <Card style={{ width: '18rem', margin:6 }}>
+                                <Card className="minor" style={{ width: '18rem', margin:6 }}>
                                     <Card.Body>
                                         <Card.Title style={{fontSize: 14}}>Total de voluntários políticos:</Card.Title>
                                         <Card.Text style={{fontSize: 14}}>
@@ -182,7 +182,7 @@ export default function Home () {
                                         </Card.Text>
                                     </Card.Body>
                                 </Card>
-                                <Card style={{ width: '18rem', margin:6  }}>
+                                <Card className="minor" style={{ width: '18rem', margin:6  }}>
                                     <Card.Body>
                                         <Card.Title style={{fontSize: 14}}>Total de voluntários RFCC:</Card.Title>
                                         <Card.Text style={{fontSize: 14}}>
@@ -192,7 +192,7 @@ export default function Home () {
                                 </Card>
                             </div>
                             <div className="tag" style={{display: 'flex'}}>
-                                <Card  style={{ width: '18rem', margin:6  }}>
+                                <Card className="minor" style={{ width: '18rem', margin:6  }}>
                                     <Card.Body>
                                         <Card.Title style={{fontSize: 14}}>Total de voluntários(outros):</Card.Title>
                                         <Card.Text style={{fontSize: 14}}>
@@ -200,7 +200,7 @@ export default function Home () {
                                         </Card.Text>
                                     </Card.Body>
                                 </Card>
-                                <Card style={{ width: '18rem', margin:6  }}>
+                                <Card className="minor" style={{ width: '18rem', margin:6  }}>
                                     <Card.Body>
                                         <Card.Title style={{fontSize: 14}}>Total de pacientes:</Card.Title>
                                         <Card.Text style={{fontSize: 14}}>

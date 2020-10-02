@@ -20,4 +20,12 @@ export const Container = styled.div`
     li {
         font-size: 14px;
     }
+    @media (max-width: 750px) 
+    {
+    .minor
+        {
+            width: 300px;
+        }
+    }
+    }
 `
