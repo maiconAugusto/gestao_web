@@ -54,7 +54,11 @@ export default function Search () {
     }, [])
 
     async function getCategories() {
-        await api.get('/categories')
+        await api.get('/categories', {
+          headers:{
+            'Authorization': `Bearer ${token}`,
+          },
+        })
             .then((response)=> {
                 setCategories(response.data.data);
             })

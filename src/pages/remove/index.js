@@ -9,11 +9,9 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { ToastContainer, toast  } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import api from '../../services/api';
-import {useDispatch} from 'react-redux';
 import { useHistory } from "react-router-dom";
 
 export default function Remove () {
-    const dispatch = useDispatch();
     let history = useHistory()
     const [collaborators, setCollaborators] = useState([]);
     let token = localStorage.getItem('@token')
