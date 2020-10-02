@@ -93,7 +93,7 @@ export default function List () {
         })
             .then((response)=> {
                 if (response.data.data.length === 0) {
-                    toast.warning("Nao encontramos resultados")
+                    toast.warning("Não encontramos resultados")
                 }
                 setList(response.data.data)
                 setLoading(false)
