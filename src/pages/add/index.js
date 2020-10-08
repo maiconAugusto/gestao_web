@@ -111,7 +111,7 @@ export default function Add () {
             setInstagram('')
         })
         .catch((error) => {
-            toast.error("Ops, Este CPF ou RG já consta em nossa base de dados!!");
+            toast.error("Ops, Algo deu errado!!");
             setLoading(false);
             setName('')
             setAge('')
