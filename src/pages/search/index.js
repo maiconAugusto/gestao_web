@@ -174,7 +174,7 @@ export default function Search () {
               </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <div style={{display: 'flex', flexDirection: 'column'}}>
+                <div className="modal-body" style={{display: 'flex', flexDirection: 'column', width: '100%'}}>
                     <small>Cpf: {data.collaborator.cpf === '' ? 'Não informado' : data.collaborator.cpf}</small>
                     <small>Rg: {data.collaborator.rg === '' ? 'Não informado' : data.collaborator.rg}</small>
                     <br/>
@@ -188,7 +188,8 @@ export default function Search () {
                     <small>Número: {data.collaborator.houseNumber === '' ? 'Não informado' : data.collaborator.houseNumber}</small>
                     <br/>
                     <small style={{textTransform: 'capitalize'}}>Colaborador: {data.categories}</small>
-                    <small>Descrição: {data.collaborator.description === '' ? 'Não informado' : data.collaborator.description}</small>
+                    <small style={{textTransform: 'capitalize'}}>Descrição:</small>
+                    <Form.Control value={data.collaborator.description === '' ? 'Não informado' : data.collaborator.description} style={{width: 700, fontSize: 12}} as="textarea" rows="5"  /> 
                     <br/>
                     <small>Facebook: {data.collaborator.facebook === '' ? 'Não informado' : (
                       <a target="_blank" href={data.collaborator.facebook}>click</a>
@@ -317,7 +318,10 @@ export default function Search () {
                     </Form.Group>
                     <Form.Group style={{padding: 5}} controlId="exampleForm.ControlTextarea1">
                         <Form.Label className="none" style={{fontSize: 14}}>Descrição</Form.Label>
-                        <Form.Control value={description} style={{width: 300}} style={{width: 300}} as="textarea" rows="2" onChange={event => setDescription(event.target.value)} />
+                        <div style={{display: 'flex', flexDirection: 'column'}}>
+                          <Form.Control value={description} style={{width: 300}} style={{width: 300}} as="textarea"  maxlength="250" rows="2" onChange={event => handleDescription(event)} />
+                          <small style={{color :'red' , fontSize: 10, marginTop: 6}}>{description.length} caracteres.</small>
+                        </div>
                     </Form.Group>
                 </Form.Row>
                 <Button style={{marginTop: -16, marginBottom: 20}} onClick={()=> sendApi()} variant="success" >
@@ -329,6 +333,15 @@ export default function Search () {
         </Modal>
       )
     }
+    function handleDescription(event) {
+      let value = description.length
+      if (value <= 250) {
+          setDescription(event.target.value)
+      }
+      else {
+          toast.error("Ops, O limete de caracteres está no maxímo!");
+      }
+  }
     return (
         <div>
             <SideMenu option={'search'} />
