@@ -110,7 +110,7 @@ export default function Add () {
             setFacebook('')
             setInstagram('')
         })
-        .catch((error) => {
+        .catch((error) => { 
             toast.error("Ops, Algo deu errado!!");
             setLoading(false);
             setName('')
