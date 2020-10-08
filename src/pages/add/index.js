@@ -14,6 +14,7 @@ import api from '../../services/api';
 import {useDispatch} from 'react-redux';
 import { useHistory } from "react-router-dom";
 
+
 export default function Add () {
     const [categories, setCategories] = useState([]);
     const dispatch = useDispatch();
