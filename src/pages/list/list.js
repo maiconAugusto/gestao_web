@@ -131,11 +131,6 @@ export default function List () {
             <Modal.Header closeButton>
               <Modal.Title style={{fontSize: 14}} id="example-modal-sizes-title-lg">
                 {data ===  undefined? 'Não informado' : data.collaborator.name} 
-                <IconButton style={{marginLeft: 6}}  aria-label="delete" onClick={() =>  {
-                  
-                }}>
-                    <Edit color="secondary"/>
-                </IconButton>
               </Modal.Title>
             </Modal.Header>
             <Modal.Body>
