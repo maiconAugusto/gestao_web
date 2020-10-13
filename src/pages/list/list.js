@@ -16,12 +16,9 @@ import {useDispatch} from 'react-redux';
 import { useHistory } from "react-router-dom";
 import Form from 'react-bootstrap/Form'
 import Modal from 'react-bootstrap/Modal';
-import IconButton from '@material-ui/core/IconButton';
-import Edit from '@material-ui/icons/Edit';
 import moment from 'moment';
 
 export default function List () {
-    const dispatch = useDispatch();
     let history = useHistory()
     useEffect(() => {
         GetCategories();
@@ -102,7 +99,11 @@ export default function List () {
                 if (response.data.data.length === 0) {
                     toast.warning("Não encontramos resultados")
                 }
-                setList(response.data.data)
+                let list = response.data.data;
+                list.sort(function(a,b) {
+                    return a.collaborator.name < b.collaborator.name ? -1 : a.collaborator.name > b.collaborator.name ? 1 : 0;
+                });
+                setList(list)
                 setLoading(false)
             })
             .catch((resp)=> {
