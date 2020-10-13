@@ -14,6 +14,11 @@ import ListItemText from '@material-ui/core/ListItemText';
 import Typography from '@material-ui/core/Typography';
 import {useDispatch} from 'react-redux';
 import { useHistory } from "react-router-dom";
+import Form from 'react-bootstrap/Form'
+import Modal from 'react-bootstrap/Modal';
+import IconButton from '@material-ui/core/IconButton';
+import Edit from '@material-ui/icons/Edit';
+import moment from 'moment';
 
 export default function List () {
     const dispatch = useDispatch();
@@ -21,6 +26,8 @@ export default function List () {
     useEffect(() => {
         GetCategories();
     }, [])
+    const [lgShow, setLgShow] = useState(false);
+    const [data, setData] = useState({collaborator: ''});
     const [categories, setCategories] = useState([]);
     const [list, setList] = useState([]);
     const [loading ,setLoading]= useState(false);
@@ -110,8 +117,62 @@ export default function List () {
             })
     }
 
+    function ViewUser () {
+        return (
+          <Modal
+            size="lg"
+            show={lgShow}
+            onHide={() => {
+              setLgShow(false)
+              setData({collaborator: ''})
+            }}
+            aria-labelledby="example-modal-sizes-title-lg"
+          >
+            <Modal.Header closeButton>
+              <Modal.Title style={{fontSize: 14}} id="example-modal-sizes-title-lg">
+                {data ===  undefined? 'Não informado' : data.collaborator.name} 
+                <IconButton style={{marginLeft: 6}}  aria-label="delete" onClick={() =>  {
+                  
+                }}>
+                    <Edit color="secondary"/>
+                </IconButton>
+              </Modal.Title>
+            </Modal.Header>
+            <Modal.Body>
+                <div style={{display: 'flex', flexDirection: 'row', width: '100%'}}></div>
+                <div style={{display: 'flex', flexDirection: 'column', width: '100%'}}></div>
+                <div style={{display: 'flex', flexDirection: 'column', width: '100%'}}>
+                    <small>Cpf: {data.collaborator.cpf === '' ? 'Não informado' : data.collaborator.cpf}</small>
+                    <small>Rg: {data.collaborator.rg === '' ? 'Não informado' : data.collaborator.rg}</small>
+                    <br/>
+                    <small>Idade: {data.collaborator.age === '' ? 'Não informado' : Math.floor(moment(new Date()).diff(moment(data.collaborator.age),'years',true))}</small>
+                    <br/>
+                    <small>Telefone: {data.collaborator.phone === '' ? 'Não informado' : data.collaborator.phone}</small>
+                    <small>WhatsApp: {data.collaborator.whatsApp === '' ? 'Não informado' : data.collaborator.whatsApp}</small>
+                    <br/>
+                    <small>Bairro: {data.collaborator.neighborhood === '' ? 'Não informado' : data.collaborator.neighborhood}</small>
+                    <small>Rua: {data.collaborator.street === '' ? 'Não informado' : data.collaborator.street}</small>
+                    <small>Número: {data.collaborator.houseNumber === '' ? 'Não informado' : data.collaborator.houseNumber}</small>
+                    <br/>
+                    <small style={{textTransform: 'capitalize'}}>Colaborador: {data.categories}</small>
+                    <small style={{textTransform: 'capitalize'}}>Descrição:</small>
+                    <Form.Control value={data.collaborator.description === '' ? 'Não informado' : data.collaborator.description} style={{width: 700, fontSize: 12}} as="textarea" rows="5"  /> 
+                    <br/>
+                    <small>Facebook: {data.collaborator.facebook === '' ? 'Não informado' : (
+                      <a target="_blank" href={data.collaborator.facebook}>click</a>
+                    )}</small>
+                    <small>Instagran: {data.collaborator.instagram === '' ? 'Não informado' : (
+                      <a target="_blank" href={data.collaborator.instagram}>click</a>
+                    )}</small>
+                </div>
+            </Modal.Body>
+          </Modal>
+        )
+    }
+
     return (
         <Container>
+             {ViewUser()}
             <SideMenu />
             <div style={{display: "flex", alignItems: 'center', marginBottom: 30, justifyContent: 'center'}}>
                 <FontAwesomeIcon style={{marginTop: 20}} icon={faList} />
@@ -149,7 +210,10 @@ export default function List () {
                 {list.map(element => {
                     return (
                         <div className="list">
-                        <ListItem  alignItems="flex-start">
+                        <ListItem onClick={()=> {
+                            setData(element)
+                            setLgShow(true)
+                        }} alignItems="flex-start">
                             <ListItemText
                             primary={element.collaborator.name}
                             secondary={

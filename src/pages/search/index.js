@@ -174,7 +174,9 @@ export default function Search () {
               </Modal.Title>
             </Modal.Header>
             <Modal.Body>
-                <div className="modal-body" style={{display: 'flex', flexDirection: 'column', width: '100%'}}>
+                <div style={{display: 'flex', flexDirection: 'row', width: '100%'}}></div>
+                <div style={{display: 'flex', flexDirection: 'column', width: '100%'}}></div>
+                <div style={{display: 'flex', flexDirection: 'column', width: '100%'}}>
                     <small>Cpf: {data.collaborator.cpf === '' ? 'Não informado' : data.collaborator.cpf}</small>
                     <small>Rg: {data.collaborator.rg === '' ? 'Não informado' : data.collaborator.rg}</small>
                     <br/>
@@ -319,7 +321,7 @@ export default function Search () {
                     <Form.Group style={{padding: 5}} controlId="exampleForm.ControlTextarea1">
                         <Form.Label className="none" style={{fontSize: 14}}>Descrição</Form.Label>
                         <div style={{display: 'flex', flexDirection: 'column'}}>
-                          <Form.Control value={description} style={{width: 300}} style={{width: 300}} as="textarea"  maxlength="250" rows="2" onChange={event => handleDescription(event)} />
+                          <Form.Control value={description} style={{width: 300}} style={{width: 300}} as="textarea"  rows="2" onChange={event => handleDescription(event)} />
                           <small style={{color :'red' , fontSize: 10, marginTop: 6}}>{description.length} caracteres.</small>
                         </div>
                     </Form.Group>
@@ -334,13 +336,7 @@ export default function Search () {
       )
     }
     function handleDescription(event) {
-      let value = description.length
-      if (value <= 250) {
-          setDescription(event.target.value)
-      }
-      else {
-          toast.error("Ops, O limete de caracteres está no maxímo!");
-      }
+      setDescription(event.target.value)
   }
     return (
         <div>

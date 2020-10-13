@@ -111,7 +111,7 @@ export default function Add () {
             setInstagram('')
         })
         .catch((error) => { 
-            toast.error("Ops, Algo deu errado!!");
+            toast.error("Ops, Algo deu errado!, notifique o suporte para resolver o problema!");
             setLoading(false);
             setName('')
             setAge('')
@@ -132,14 +132,7 @@ export default function Add () {
     }
 
     function handleDescription(event) {
-        let value = description.length
-        if (value <= 250) {
-            setDescription(event.target.value)
-            console.log(event.target.value.length)
-        }
-        else {
-            toast.error("Ops, O limete de caracteres está no maxímo!");
-        }
+        setDescription(event.target.value)
     }
 
     return (
@@ -256,12 +249,11 @@ export default function Add () {
                         <Form.Group style={{padding: 5}} controlId="exampleForm.ControlTextarea1">
                             <Form.Label className="none" style={{fontSize: 14}}>Descrição</Form.Label>
                             <div style={{display: 'flex', flexDirection: 'column'}}>
-                                <Form.Control  style={{width: 300}} maxlength="250" as="textarea" rows="2" onChange={event => handleDescription(event)} />
-                                <small style={{color :'red' , fontSize: 10, marginTop: 6}}>{description.length} caracteres.</small>
+                                <Form.Control  style={{width: 300}}  as="textarea" rows="2" onChange={event => handleDescription(event)} />
                             </div>
                         </Form.Group>
-                    </Form.Row>``
-                    <Button style={{marginTop: -16}} variant="success" onClick={() => sendToApi()}>
+                    </Form.Row>
+                    <Button style={{marginTop: -50}} variant="success" onClick={() => sendToApi()}>
                         Salvar
                     </Button>
                     </Form>
