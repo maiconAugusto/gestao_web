@@ -178,126 +178,90 @@ export default function Add () {
                         <FontAwesomeIcon icon={faUserPlus} />
                     <strong style={{marginLeft: 10}}>ADICIONAR COLABORADOR</strong>
                     </div>
-                    <Form >
-                    <Form.Row style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
-                        <Form.Group controlId="formGridEmail">
-                            <Avatar name="Foo Bar" size={70} round={true} src={profile === null ? FakeAvatar : profile} style={{marginRight: 4, marginTop: 20}} />
-                        </Form.Group>
-                        <Form.Group controlId="formGridEmail">
-                            <Form.File  
-                                style={{width: 300, marginTop: 30}}
-                                id="custom-file-translate-html"
-                                label="Imagen"
-                                accept="image/*"
-                                data-browse="Procurar"
-                                custom
-                                onChange={handleChange}
-                            />
-                        </Form.Group>
-                        <Form.Group style={{padding: 5}} controlId="formGridEmail">
-                            <div style={{display: 'flex', flexDirection: 'column'}}>
-                                <Form.Label className="none" style={{fontSize: 14, marginBottom: 0}}>Nome</Form.Label>
-                                <Form.Control type="text" placeholder="Nome completo" onChange={event => setName(event.target.value)} />
-                            </div>
-                        </Form.Group>
-    
-                        <Form.Group style={{padding: 5}} controlId="formGridPassword">
-                            <div style={{display: 'flex', flexDirection: 'column'}}>
-                                <Form.Label className="none" style={{fontSize: 14, marginBottom: 0}}>Data de nascimento</Form.Label>
-                                <Form.Control style={{width: 150}} type="date" placeholder="Data de nascimento" onChange={event => setAge(event.target.value)} />
-                            </div>
-                        </Form.Group>
-                    </Form.Row>
-                    <Form.Row>
-                        <Form.Group style={{padding: 5}} controlId="formGridEmail">
-                            <div style={{display: 'flex', flexDirection: 'column'}}>
-                                <Form.Label className="none" style={{fontSize: 14, marginBottom: 0}}>RG</Form.Label>
-                                <InputMask style={{width: 140}} placeholder="RG" onChange={event => setRg(event.target.value)} />
-                            </div>
-                        </Form.Group>
-                        <Form.Group style={{padding: 5}} controlId="formGridPassword">
-                            <div style={{display: 'flex', flexDirection: 'column'}}>
-                                <Form.Label className="none" style={{fontSize: 14, marginBottom: 0}}>CPF</Form.Label>
-                                <InputMask style={{width: 150}} mask="999.999.999-99" placeholder="CPF" onChange={event => setCpf(event.target.value)} />
-                            </div>
-                        </Form.Group>
-                        <Form.Group style={{padding: 5}} controlId="formGridEmail">
-                            <div style={{display: 'flex', flexDirection: 'column'}}>
-                                <Form.Label className="none" style={{fontSize: 14, marginBottom: 0}}>Telefone fixo</Form.Label>
-                                <InputMask mask="(99) 9999-9999" placeholder="Telefone" onChange={event => setPhone(event.target.value)} />
-                            </div>
-                        </Form.Group>
-                        <Form.Group style={{padding: 5}} controlId="formGridPassword">
+                    <Form  style={{width: 700}}>
                         <div style={{display: 'flex', flexDirection: 'column'}}>
-                            <Form.Label className="none" style={{fontSize: 14, marginBottom: 0}}>Celular (WhatsApp)</Form.Label>
-                            <InputMask mask="(99) 99999-9999" placeholder="WhatsApp" onChange={event => setWhatsApp(event.target.value)} />
+                            
+                            <div style={{display: 'flex', justifyContent: 'space-around'}}>
+                                <div>
+                                    <div style={{display: 'flex', flexDirection: 'column'}}>
+                                    <div style={{display: 'flex', alignItems: 'center'}}>
+                                        <Avatar name="Foo Bar" size={50} round={true} src={profile === null ? FakeAvatar : profile} style={{marginRight: 4, marginTop: 20}} />
+                                        <Form.File  
+                                            style={{width: 250, marginTop: 25}}
+                                            id="custom-file-translate-html"
+                                            label="Imagen"
+                                            accept="image/*"
+                                            data-browse="Procurar"
+                                            custom
+                                            onChange={handleChange}
+                                        />
+                                    </div>
+                                    </div>
+                                    <Form.Label className="none" style={{fontSize: 14, marginBottom: 0}}>Nome</Form.Label>
+                                    <Form.Control type="text" placeholder="Nome completo" onChange={event => setName(event.target.value)} />
+                                    <Form.Label className="none" style={{fontSize: 14, marginBottom: 0}}>Data de nascimento</Form.Label>
+                                    <Form.Control type="date" placeholder="Data de nascimento" onChange={event => setAge(event.target.value)} />
+                                    <div style={{display: 'flex', flexDirection: 'column'}}>
+                                      <Form.Label className="none" style={{fontSize: 14, marginBottom: 0}}>RG</Form.Label>
+                                      <InputMask  placeholder="RG" onChange={event => setRg(event.target.value)} />
+                                    </div>
+                                    <div style={{display: 'flex', flexDirection: 'column'}}>
+                                        <Form.Label className="none" style={{fontSize: 14, marginBottom: 0}}>CPF</Form.Label>
+                                        <InputMask  mask="999.999.999-99" placeholder="CPF" onChange={event => setCpf(event.target.value)} />
+                                    </div>
+                                    <div style={{display: 'flex', flexDirection: 'column'}}>
+                                        <Form.Label className="none" style={{fontSize: 14, marginBottom: 0}}>Telefone fixo</Form.Label>
+                                        <InputMask mask="(99) 9999-9999" placeholder="Telefone" onChange={event => setPhone(event.target.value)} />
+                                    </div>
+                                    <div style={{display: 'flex', flexDirection: 'column'}}>
+                                        <Form.Label className="none" style={{fontSize: 14, marginBottom: 0}}>Celular (WhatsApp)</Form.Label>
+                                        <InputMask mask="(99) 99999-9999" placeholder="WhatsApp" onChange={event => setWhatsApp(event.target.value)} />
+                                    </div>
+                                    <Form.Label className="none" style={{fontSize: 14, marginBottom: 0}}>Bairro</Form.Label>
+                                    <Form.Control type="text" placeholder="Bairro" onChange={event => setNeighborhood(event.target.value)} />
+                                </div>
+                                <div>
+                                    <Form.Label className="none" style={{fontSize: 14, marginBottom: 0}}>Rua</Form.Label>
+                                    <Form.Control type="text" placeholder="Rua" onChange={event => setStreet(event.target.value)} />
+                                    <Form.Label className="none" style={{fontSize: 14, marginBottom: 0}}>Número</Form.Label>
+                                    <Form.Control type="text" placeholder="Número da casa" onChange={event => setHouseNumber(event.target.value)} />
+                                    <Form.Label className="none" style={{fontSize: 14, marginBottom: 0}}>Complemento</Form.Label>
+                                    <Form.Control type="text" placeholder="Complemento" onChange={event => setComplement(event.target.value)} />
+                                    <Form.Label className="none" style={{fontSize: 14, marginBottom: 0}}>Referência</Form.Label>
+                                    <Form.Control type="text" placeholder="Referência" onChange={event => setReference(event.target.value)} />
+                                    <Form.Group controlId="formGridState">
+                                        <div style={{display: 'flex', flexDirection: 'column'}}>
+                                            <Form.Label className="none" style={{fontSize: 14, marginBottom: 0}}>Categoria</Form.Label>
+                                            <form onChangeCapture={(event) => setIdCategories(event.target.value)}>
+                                                <select>
+                                                <option value="" style={{textTransform: 'lowercase'}}>Selecione</option>
+                                                    {categories.map(element => {
+                                                        return (
+                                                            <>
+                                                            <option value={element.id} style={{textTransform: 'lowercase'}}>{element.categories}</option>
+                                                            </>
+                                                        )
+                                                    })}
+                                                </select>
+                                            </form>
+                                        </div>
+                                    </Form.Group>
+                                    <Form.Label className="none" style={{fontSize: 14, marginBottom: 0}}>FaceBook</Form.Label>
+                                    <Form.Control type="url" placeholder="Link" onChange={event => setFacebook(event.target.value)} />
+                                    <Form.Label className="none" style={{fontSize: 14, marginBottom: 0}}>Instagran</Form.Label>
+                                    <Form.Control type="url" placeholder="Link" onChange={event => setInstagram(event.target.value)} />
+                                    <Form.Label className="none" style={{fontSize: 14}}>Descrição</Form.Label>
+                                    <div style={{display: 'flex', flexDirection: 'column'}}>
+                                        <Form.Control  style={{width: 300}}  as="textarea" rows="2" onChange={event => handleDescription(event)} />
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        </Form.Group>
-                    </Form.Row>
-                    <Form.Row >
-                        <Form.Group style={{padding: 5}} controlId="formGridPassword">
-                            <Form.Label className="none" style={{fontSize: 14, marginBottom: 0}}>Bairro</Form.Label>
-                            <Form.Control type="text" placeholder="Bairro" onChange={event => setNeighborhood(event.target.value)} />
-                        </Form.Group>
-                        <Form.Group style={{padding: 5}} controlId="formGridEmail">
-                            <Form.Label className="none" style={{fontSize: 14, marginBottom: 0}}>Rua</Form.Label>
-                            <Form.Control type="tel" placeholder="Rua" onChange={event => setStreet(event.target.value)} />
-                        </Form.Group>
-    
-                        <Form.Group style={{padding: 5}} controlId="formGridPassword">
-                            <div style={{display: 'flex', flexDirection: 'column'}}>
-                                <Form.Label className="none" style={{fontSize: 14, marginBottom: 0}}>Número</Form.Label>
-                                <Form.Control type="text" placeholder="Número da casa" onChange={event => setHouseNumber(event.target.value)} />
-                            </div>
-                        </Form.Group>
-                    </Form.Row>
-                    <Form.Row >
-                    <Form.Group style={{padding: 5}} controlId="formGridEmail">
-                        <Form.Label className="none" style={{fontSize: 14, marginBottom: 0}}>Complemento</Form.Label>
-                            <Form.Control type="text" placeholder="Complemento" onChange={event => setComplement(event.target.value)} />
-                        </Form.Group>
-                        <Form.Group style={{padding: 5}} controlId="formGridPassword">
-                            <Form.Label className="none" style={{fontSize: 14, marginBottom: 0}}>Referência</Form.Label>
-                            <Form.Control type="text" placeholder="Referência" onChange={event => setReference(event.target.value)} />
-                        </Form.Group>
-                        <Form.Group style={{padding: 5}} controlId="formGridState">
-                            <div style={{display: 'flex', flexDirection: 'column'}}>
-                                <Form.Label className="none" style={{fontSize: 14, marginBottom: 0}}>Categoria</Form.Label>
-                                <form onChangeCapture={(event) => setIdCategories(event.target.value)}>
-                                    <select>
-                                    <option value="" style={{textTransform: 'lowercase'}}>Selecione</option>
-                                        {categories.map(element => {
-                                            return (
-                                                <>
-                                                <option value={element.id} style={{textTransform: 'lowercase'}}>{element.categories}</option>
-                                                </>
-                                            )
-                                        })}
-                                    </select>
-                                </form>
-                            </div>
-                        </Form.Group>
-                    </Form.Row>
-                    <Form.Row >
-                        <Form.Group style={{padding: 5}} controlId="formGridEmail">
-                            <Form.Label className="none" style={{fontSize: 14, marginBottom: 0}}>FaceBook</Form.Label>
-                            <Form.Control type="url" placeholder="Link" onChange={event => setFacebook(event.target.value)} />
-                        </Form.Group>
-    
-                        <Form.Group style={{padding: 5}} controlId="formGridPassword">
-                            <Form.Label className="none" style={{fontSize: 14, marginBottom: 0}}>Instagran</Form.Label>
-                            <Form.Control type="url" placeholder="Link" onChange={event => setInstagram(event.target.value)} />
-                        </Form.Group>
-                        <Form.Group style={{padding: 5}} controlId="exampleForm.ControlTextarea1">
-                            <Form.Label className="none" style={{fontSize: 14}}>Descrição</Form.Label>
-                            <div style={{display: 'flex', flexDirection: 'column'}}>
-                                <Form.Control  style={{width: 300}}  as="textarea" rows="2" onChange={event => handleDescription(event)} />
-                            </div>
-                        </Form.Group>
-                    </Form.Row>
-                    <Button style={{marginTop: -50}} variant="success" onClick={() => sendToApi()}>
-                        Salvar
-                    </Button>
+                        <div style={{display: 'flex', justifyContent: 'flex-end', marginRight: 25, marginTop: 20, marginBottom: 20}}>
+                            <Button variant="success" onClick={() => sendToApi()}>
+                                Salvar
+                            </Button>
+                        </div>
                     </Form>
                 </>
               )}

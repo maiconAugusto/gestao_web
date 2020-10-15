@@ -176,7 +176,7 @@ export default function List () {
         <Container>
              {ViewUser()}
              <div style={{height: '100vh', position: 'fixed', left: 0, top: 0}}>
-               <SideMenu />
+               <SideMenu option={'list'} />
              </div>
             <div style={{display: "flex", alignItems: 'center', marginBottom: 30, justifyContent: 'center'}}>
                 <FontAwesomeIcon style={{marginTop: 20}} icon={faList} />
