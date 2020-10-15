@@ -7,7 +7,6 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Modal from 'react-bootstrap/Modal';
 import api from '../../services/api';
-import Image from 'react-bootstrap/Image'
 import moment from 'moment';
 import Button from 'react-bootstrap/Button';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -21,6 +20,7 @@ import Edit from '@material-ui/icons/Edit';
 import { useHistory } from "react-router-dom";
 import FakeAvatar from '../../assets/fake.png'
 import Resizer from 'react-image-file-resizer';
+import Avatar from 'react-avatar';
 
 export default function Search () {
     let history = useHistory()
@@ -180,7 +180,7 @@ export default function Search () {
           >
             <Modal.Header closeButton>
               <Modal.Title style={{fontSize: 14, textTransform: 'capitalize'}} id="example-modal-sizes-title-lg">
-                <Image src={data.collaborator.avatar === null ? FakeAvatar : data.collaborator.avatar} width={80} style={{marginRight: 4}} roundedCircle />
+              <Avatar name={data.collaborator.name} size={60} round={true} src={data.collaborator.avatar === null ? FakeAvatar : data.collaborator.avatar} style={{marginRight: 4}} />
                 {data ===  undefined? 'Não informado' : data.collaborator.name} 
                 <IconButton style={{marginLeft: 6}}  aria-label="delete" onClick={() =>  {
                   setEdit()
@@ -251,7 +251,7 @@ export default function Search () {
               <Form className="tag">
                 <Form.Row style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
                     <Form.Group controlId="formGridEmail">
-                        <Image src={profile === null ? FakeAvatar : profile} width={60} style={{marginRight: 4}} roundedCircle />
+                      <Avatar  size={70} round={true} src={profile === null ? FakeAvatar : profile} style={{marginRight: 4, marginTop: 20}} />
                     </Form.Group>
                     <Form.Group controlId="formGridEmail">
                       <Form.File  
@@ -399,7 +399,7 @@ export default function Search () {
                             setLgShow(true)
                             setData(element)
                           }}>
-                            <Image src={element.collaborator.avatar === null ? FakeAvatar : element.collaborator.avatar} width={50} style={{marginRight: 4}} roundedCircle />
+                            <Avatar name={element.collaborator.name} size={50} round={true} src={element.collaborator.avatar === null ? FakeAvatar : element.collaborator.avatar} style={{marginRight: 4}} />
                             {element.collaborator.name}
                           </ListGroup.Item>
                         </div>

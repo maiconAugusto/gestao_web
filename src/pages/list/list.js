@@ -12,11 +12,11 @@ import Lists from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
 import Typography from '@material-ui/core/Typography';
 import FakeAvatar from '../../assets/fake.png'
-import Image from 'react-bootstrap/Image'
 import { useHistory } from "react-router-dom";
 import Form from 'react-bootstrap/Form'
 import Modal from 'react-bootstrap/Modal';
 import moment from 'moment';
+import Avatar from 'react-avatar';
 
 export default function List () {
     let history = useHistory()
@@ -131,7 +131,7 @@ export default function List () {
           >
             <Modal.Header closeButton>
               <Modal.Title style={{fontSize: 14}} id="example-modal-sizes-title-lg">
-              <Image src={data.collaborator.avatar === null ? FakeAvatar : data.collaborator.avatar} width={80} style={{marginRight: 4}} roundedCircle />
+              <Avatar size={60} round={true} src={data.collaborator.avatar === null ? FakeAvatar : data.collaborator.avatar} style={{marginRight: 4}} />
                 {data ===  undefined? 'Não informado' : data.collaborator.name} 
               </Modal.Title>
             </Modal.Header>
@@ -212,7 +212,7 @@ export default function List () {
                             setLgShow(true)
                         }} alignItems="flex-start">
                             <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
-                                <Image src={element.collaborator.avatar === null ? FakeAvatar : element.collaborator.avatar} width={50} style={{marginRight: 4}} roundedCircle />
+                                <Avatar name={element.collaborator.name} size={60} round={true} src={element.collaborator.avatar === null ? FakeAvatar : element.collaborator.avatar} style={{marginRight: 4}} />
                                 <div style={{display: 'flex', flexDirection: 'column'}}>
                                     <Typography
                                         component="span"

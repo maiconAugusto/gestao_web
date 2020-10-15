@@ -6,7 +6,6 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import Spinner from 'react-bootstrap/Spinner';
 import Form from 'react-bootstrap/Form'
 import FakeAvatar from '../../assets/fake.png'
-import Image from 'react-bootstrap/Image'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUserPlus } from '@fortawesome/free-solid-svg-icons'
 import { ToastContainer, toast  } from 'react-toastify';
@@ -15,6 +14,7 @@ import 'react-toastify/dist/ReactToastify.css';
 import api from '../../services/api';
 import { useHistory } from "react-router-dom";
 import Resizer from 'react-image-file-resizer';
+import Avatar from 'react-avatar';
 
 export default function Add () {
     const [categories, setCategories] = useState([]);
@@ -179,7 +179,7 @@ export default function Add () {
                     <Form >
                     <Form.Row style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
                         <Form.Group controlId="formGridEmail">
-                            <Image src={profile === null ? FakeAvatar : profile} width={60} style={{marginRight: 4,}} roundedCircle />
+                            <Avatar name="Foo Bar" size={70} round={true} src={profile === null ? FakeAvatar : profile} style={{marginRight: 4, marginTop: 20}} />
                         </Form.Group>
                         <Form.Group controlId="formGridEmail">
                             <Form.File  
