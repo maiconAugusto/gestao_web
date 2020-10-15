@@ -168,7 +168,7 @@ export default function Add () {
                         <Form.Group style={{padding: 5}} controlId="formGridEmail">
                             <div style={{display: 'flex', flexDirection: 'column'}}>
                                 <Form.Label className="none" style={{fontSize: 14, marginBottom: 0}}>RG</Form.Label>
-                                <InputMask mask="99.999.999-9" placeholder="RG" onChange={event => setRg(event.target.value)} />
+                                <InputMask placeholder="RG" onChange={event => setRg(event.target.value)} />
                             </div>
                         </Form.Group>
                     </Form.Row>

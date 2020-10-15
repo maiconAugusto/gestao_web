@@ -17,11 +17,9 @@ import { ToastContainer, toast  } from 'react-toastify';
 import InputMask from "react-input-mask";
 import IconButton from '@material-ui/core/IconButton';
 import Edit from '@material-ui/icons/Edit';
-import {useDispatch} from 'react-redux';
 import { useHistory } from "react-router-dom";
 
 export default function Search () {
-    const dispatch = useDispatch();
     let history = useHistory()
     const [lgShow, setLgShow] = useState(false);
     const [editShow, setEditShow] = useState(false);
@@ -48,6 +46,7 @@ export default function Search () {
     const [loading, setLoading] = useState(false);
     let token = localStorage.getItem('@token')
     const [categories, setCategories] = useState([]);
+    const [selectedCategories, setSelectedCategories] = useState('')
 
     useEffect(()=> {
         getCategories();
@@ -134,9 +133,10 @@ export default function Search () {
       })
     }
     function setEdit(){
+      setSelectedCategories(data.categories)
       setName(data.collaborator.name)
       setAge(data.collaborator.age)
-      setRg(data.collaborator.cpf)
+      setRg(data.collaborator.rg)
       setCpf(data.collaborator.cpf)
       setWhatsApp(data.collaborator.whatsApp)
       setPhone(data.collaborator.phone)
@@ -240,7 +240,7 @@ export default function Search () {
                     <Form.Group style={{padding: 5}} controlId="formGridEmail">
                         <div style={{display: 'flex', flexDirection: 'column'}}>
                             <Form.Label className="none" style={{fontSize: 14, marginBottom: 0}}>RG</Form.Label>
-                            <InputMask value={rg} style={{width: 300}} mask="99.999.999-9" placeholder="RG" onChange={event => setRg(event.target.value)} />
+                            <InputMask value={rg} style={{width: 300}}  placeholder="RG" onChange={event => setRg(event.target.value)} />
                         </div>
                     </Form.Group>
                 </Form.Row>
@@ -295,7 +295,7 @@ export default function Search () {
                             <Form.Label className="none" style={{fontSize: 14, marginBottom: 0}}>Categoria</Form.Label>
                             <form onChangeCapture={(event) => setIdCategories(event.target.value)}>
                                 <select style={{width: 300, height: 34, marginTop: 12}}>
-                                <option value="" style={{textTransform: 'lowercase'}}>Selecione</option>
+                                    <option value="" style={{textTransform: 'lowercase'}}>{selectedCategories}</option>
                                     {categories.map(element => {
                                         return (
                                             <>
@@ -322,7 +322,6 @@ export default function Search () {
                         <Form.Label className="none" style={{fontSize: 14}}>Descrição</Form.Label>
                         <div style={{display: 'flex', flexDirection: 'column'}}>
                           <Form.Control value={description} style={{width: 300}} style={{width: 300}} as="textarea"  rows="2" onChange={event => handleDescription(event)} />
-                          <small style={{color :'red' , fontSize: 10, marginTop: 6}}>{description.length} caracteres.</small>
                         </div>
                     </Form.Group>
                 </Form.Row>
