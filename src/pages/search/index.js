@@ -379,7 +379,9 @@ export default function Search () {
   }
     return (
         <div>
-            <SideMenu option={'search'} />
+            <div style={{height: '100vh', position: 'fixed', left: 0, top: 0}}>
+              <SideMenu option={'search'} />
+             </div>
             {ViewUser()}
             {EditaUser()}
             <Container >

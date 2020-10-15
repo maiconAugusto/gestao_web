@@ -163,7 +163,9 @@ export default function Add () {
 
     return (
         <div>
-            <SideMenu option={'add'}/>
+            <div style={{height: '100vh', position: 'fixed', left: 0, top: 0}}>
+                <SideMenu option={'add'}/>
+            </div>
             <Container>
               {loading === true ? 
                 <div style={{paddingTop: 50, display: 'flex', alignItems: 'center'}}>

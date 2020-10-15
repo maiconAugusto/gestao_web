@@ -56,7 +56,9 @@ export default function Remove () {
     }
     return (
         <div>
-            <SideMenu option={'remove'} />
+            <div style={{height: '100vh', position: 'fixed', left: 0, top: 0}}>
+                <SideMenu option={'remove'} />
+             </div>
             <Container>
               <div  style={{display: "flex", alignItems: 'center', marginBottom: 30}}>
                 <FontAwesomeIcon icon={faUserTimes} />

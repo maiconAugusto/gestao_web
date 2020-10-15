@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-no-target-blank */
 import React, {useState, useEffect} from 'react';
 import {Container} from './style';
 import SideMenu from '../../components/sideMenu/index';
@@ -13,13 +14,16 @@ import ListItem from '@material-ui/core/ListItem';
 import Typography from '@material-ui/core/Typography';
 import FakeAvatar from '../../assets/fake.png'
 import { useHistory } from "react-router-dom";
+import {useDispatch} from 'react-redux';
 import Form from 'react-bootstrap/Form'
 import Modal from 'react-bootstrap/Modal';
 import moment from 'moment';
 import Avatar from 'react-avatar';
 
 export default function List () {
-    let history = useHistory()
+    let history = useHistory();
+    let dispatch = useDispatch();
+
     useEffect(() => {
         GetCategories();
     }, [])
@@ -104,6 +108,7 @@ export default function List () {
                     return a.collaborator.name < b.collaborator.name ? -1 : a.collaborator.name > b.collaborator.name ? 1 : 0;
                 });
                 setList(list)
+                dispatch({type: '@SETLIST', payload: list})
                 setLoading(false)
             })
             .catch((resp)=> {
@@ -170,40 +175,45 @@ export default function List () {
     return (
         <Container>
              {ViewUser()}
-            <SideMenu />
+             <div style={{height: '100vh', position: 'fixed', left: 0, top: 0}}>
+               <SideMenu />
+             </div>
             <div style={{display: "flex", alignItems: 'center', marginBottom: 30, justifyContent: 'center'}}>
                 <FontAwesomeIcon style={{marginTop: 20}} icon={faList} />
                 <strong style={{marginLeft: 10, marginTop: 20}}>LISTAGEM</strong>
             </div>
             <small style={{marginTop: 10, fontWeight: 600}}>Filtro:</small>
-            <div style={{display: 'flex', justifyContent: 'space-around', width: 400 }}>
+            <div style={{display: 'flex', justifyContent: 'space-around', width: 600 }}>
                 {loadingFilter === true ? (
                     <div style={{paddingTop: 10, display: 'flex', alignItems: 'center'}}>
                         <Spinner size="sm" animation="border" variant="danger" />
                         <small style={{marginLeft: 8}}>Carregando...</small>
                     </div>
                 ) : (
-                    <div style={{display: 'flex', alignItems: 'center'}}>
+                    <div style={{display: 'flex', height: 100, flexWrap: 'wrap'}}>
                         {categories.map(element => {
                         return (
-                        <div style={{display: 'flex', flexDirection: 'row', height: 50, width: 110, alignItems: 'center'}}>
-                            <input type="checkbox" id="scales" onChange={()=> selectCheck(element.id)}  checked={element.isSelect} />
-                            <label style={{ marginLeft: 8, marginTop: 8, fontSize: 14}}>{element.categories}</label>
-                        </div>
+                            <div class="border" style={{display: 'flex', flexDirection: 'row', height: 50, width: 150, alignItems: 'center', justifyContent: 'flex-start'}}>
+                                <input type="checkbox" style={{marginLeft: 8}} onChange={()=> selectCheck(element.id)}  checked={element.isSelect} />
+                                <label style={{ marginLeft: 8, marginTop: 8, fontSize: 13}}>{element.categories}</label>
+                            </div>
                         )
                       })}
                     </div>
                 )}
             </div>
+            {loadingFilter === false ? (
+                <div style={{width: 600, display: 'flex', justifyContent: 'flex-end'}}>
+                  <Button style={{width: 150, marginTop: 10, fontSize: 14}} variant="success" onClick={(event)=> getList()}>Gerar lista</Button>
+                </div>
+            ) : null}
             {loading === true  ? (
                 <div style={{paddingTop: 10, display: 'flex', alignItems: 'center'}}>
                     <Spinner animation="border" variant="danger" />
                     <small style={{marginLeft: 8}}>Carregando...</small>
                 </div>
-            ) : (
-                <Button style={{width: 400, marginTop: 10}} variant="success" onClick={(event)=> getList()}>Gerar lista</Button>
-            )}
-            <Lists style={{width: 400}}>
+            ) : null}
+            <Lists style={{width: 600}}>
                 {list.map(element => {
                     return (
                         <div className="list">
@@ -218,7 +228,7 @@ export default function List () {
                                         component="span"
                                         variant="body2"
                                         color="textPrimary"
-                                        style={{textTransform: 'capitalize'}}
+                                        style={{textTransform: 'capitalize', fontSize: 14}}
                                     >
                                         {element.collaborator.name}
                                     </Typography>
@@ -226,7 +236,7 @@ export default function List () {
                                         component="span"
                                         variant="body2"
                                         color="textPrimary"
-                                        style={{textTransform: 'capitalize'}}
+                                        style={{textTransform: 'capitalize', fontSize: 12}}
                                     >
                                         {element.categories}
                                     </Typography>
