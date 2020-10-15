@@ -10,9 +10,9 @@ import Spinner from 'react-bootstrap/Spinner';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Lists from '@material-ui/core/List';
 import ListItem from '@material-ui/core/ListItem';
-import ListItemText from '@material-ui/core/ListItemText';
 import Typography from '@material-ui/core/Typography';
-import {useDispatch} from 'react-redux';
+import FakeAvatar from '../../assets/fake.png'
+import Image from 'react-bootstrap/Image'
 import { useHistory } from "react-router-dom";
 import Form from 'react-bootstrap/Form'
 import Modal from 'react-bootstrap/Modal';
@@ -131,6 +131,7 @@ export default function List () {
           >
             <Modal.Header closeButton>
               <Modal.Title style={{fontSize: 14}} id="example-modal-sizes-title-lg">
+              <Image src={data.collaborator.avatar === null ? FakeAvatar : data.collaborator.avatar} width={80} style={{marginRight: 4}} roundedCircle />
                 {data ===  undefined? 'Não informado' : data.collaborator.name} 
               </Modal.Title>
             </Modal.Header>
@@ -210,20 +211,27 @@ export default function List () {
                             setData(element)
                             setLgShow(true)
                         }} alignItems="flex-start">
-                            <ListItemText
-                            primary={element.collaborator.name}
-                            secondary={
-                                <React.Fragment>
-                                <Typography
-                                    component="span"
-                                    variant="body2"
-                                    color="textPrimary"
-                                >
-                                    {element.categories}
-                                </Typography>
-                                </React.Fragment>
-                            }
-                            />
+                            <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
+                                <Image src={element.collaborator.avatar === null ? FakeAvatar : element.collaborator.avatar} width={50} style={{marginRight: 4}} roundedCircle />
+                                <div style={{display: 'flex', flexDirection: 'column'}}>
+                                    <Typography
+                                        component="span"
+                                        variant="body2"
+                                        color="textPrimary"
+                                        style={{textTransform: 'capitalize'}}
+                                    >
+                                        {element.collaborator.name}
+                                    </Typography>
+                                    <Typography
+                                        component="span"
+                                        variant="body2"
+                                        color="textPrimary"
+                                        style={{textTransform: 'capitalize'}}
+                                    >
+                                        {element.categories}
+                                    </Typography>
+                                </div>
+                            </div>
                         </ListItem>
                         </div>
                     )

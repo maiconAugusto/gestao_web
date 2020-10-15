@@ -7,6 +7,7 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import Modal from 'react-bootstrap/Modal';
 import api from '../../services/api';
+import Image from 'react-bootstrap/Image'
 import moment from 'moment';
 import Button from 'react-bootstrap/Button';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -18,6 +19,8 @@ import InputMask from "react-input-mask";
 import IconButton from '@material-ui/core/IconButton';
 import Edit from '@material-ui/icons/Edit';
 import { useHistory } from "react-router-dom";
+import FakeAvatar from '../../assets/fake.png'
+import Resizer from 'react-image-file-resizer';
 
 export default function Search () {
     let history = useHistory()
@@ -26,6 +29,8 @@ export default function Search () {
     const [data, setData] = useState({collaborator: ''});
     const [collaborators, setCollaborators] = useState([]);
 
+    const [avatar, setavatar] = useState(null)
+    const [profile, setProfile] = useState(null)
     const [name, setName] = useState('');
     const [age, setAge] = useState('');
     const [rg, setRg] = useState('');
@@ -86,6 +91,7 @@ export default function Search () {
           }
       })
       .then((response) => {
+        console.log(response.data.data)
           setCollaborators(response.data.data);
       })
       .catch((resp)=> {
@@ -101,7 +107,7 @@ export default function Search () {
     }
     async function sendApi(){
       setLoading(true)
-      await api.put(`/update-collaborators/${data.collaborator.id}`, {
+      const _data = {
         name,
         age,
         rg,
@@ -119,6 +125,14 @@ export default function Search () {
         state,
         facebook,
         instagram,
+      }
+      const data_ = new FormData()
+      data_.append('file', avatar)
+      data_.append('data', JSON.stringify(_data))
+      await api.put(`/update-collaborators/${data.collaborator.id}`, data_, {
+        headers: {
+          "Content-Type": `multipart/form-data; boundary=${data_._boundary}`,
+        }
       })
       .then((r) => {
         setLoading(false)
@@ -133,6 +147,7 @@ export default function Search () {
       })
     }
     function setEdit(){
+      setProfile(data.collaborator.avatar)
       setSelectedCategories(data.categories)
       setName(data.collaborator.name)
       setAge(data.collaborator.age)
@@ -164,7 +179,8 @@ export default function Search () {
             aria-labelledby="example-modal-sizes-title-lg"
           >
             <Modal.Header closeButton>
-              <Modal.Title style={{fontSize: 14}} id="example-modal-sizes-title-lg">
+              <Modal.Title style={{fontSize: 14, textTransform: 'capitalize'}} id="example-modal-sizes-title-lg">
+                <Image src={data.collaborator.avatar === null ? FakeAvatar : data.collaborator.avatar} width={80} style={{marginRight: 4}} roundedCircle />
                 {data ===  undefined? 'Não informado' : data.collaborator.name} 
                 <IconButton style={{marginLeft: 6}}  aria-label="delete" onClick={() =>  {
                   setEdit()
@@ -204,6 +220,16 @@ export default function Search () {
           </Modal>
         )
     }
+    async function handleChange(event) {
+      if (event.target.files[0] === undefined) {
+          return
+      }
+      setavatar(event.target.files[0])
+      Resizer.imageFileResizer(
+          event.target.files[0], 300, 300, 'JPEG', 100, 0, uri=>{
+              setProfile(uri)
+          },'base64')
+  }
     function EditaUser () {
       return (
         <Modal
@@ -223,32 +249,46 @@ export default function Search () {
             ) : (
             <Container>
               <Form className="tag">
-                <Form.Row>
+                <Form.Row style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+                    <Form.Group controlId="formGridEmail">
+                        <Image src={profile === null ? FakeAvatar : profile} width={60} style={{marginRight: 4}} roundedCircle />
+                    </Form.Group>
+                    <Form.Group controlId="formGridEmail">
+                      <Form.File  
+                          style={{width: 350, marginTop: 30, marginRight: 30}}
+                          id="custom-file-translate-html"
+                          label="Imagen"
+                          accept="image/*"
+                          data-browse="Procurar"
+                          custom
+                          onChange={handleChange}
+                      />
+                      </Form.Group>
                     <Form.Group style={{padding: 5}} controlId="formGridEmail">
                         <div style={{display: 'flex', flexDirection: 'column'}}>
                             <Form.Label className="none" style={{fontSize: 14, marginBottom: 0}}>Nome</Form.Label>
-                            <Form.Control value={name} style={{width: 300}} type="text" placeholder="Nome completo" onChange={event => setName(event.target.value)} />
+                            <Form.Control value={name} style={{width: 250}} type="text" placeholder="Nome completo" onChange={event => setName(event.target.value)} />
                         </div>
                     </Form.Group>
 
                     <Form.Group style={{padding: 5}} controlId="formGridPassword">
                         <div style={{display: 'flex', flexDirection: 'column'}}>
                             <Form.Label className="none" style={{fontSize: 14, marginBottom: 0}}>Data de nascimento</Form.Label>
-                            <Form.Control value={age} style={{width: 300}} type="date" placeholder="Data de nascimento" onChange={event => setAge(event.target.value)} />
-                        </div>
-                    </Form.Group>
-                    <Form.Group style={{padding: 5}} controlId="formGridEmail">
-                        <div style={{display: 'flex', flexDirection: 'column'}}>
-                            <Form.Label className="none" style={{fontSize: 14, marginBottom: 0}}>RG</Form.Label>
-                            <InputMask value={rg} style={{width: 300}}  placeholder="RG" onChange={event => setRg(event.target.value)} />
+                            <Form.Control value={age} style={{width: 150}} type="date" placeholder="Data de nascimento" onChange={event => setAge(event.target.value)} />
                         </div>
                     </Form.Group>
                 </Form.Row>
                 <Form.Row>
+                    <Form.Group style={{padding: 5}} controlId="formGridEmail">
+                        <div style={{display: 'flex', flexDirection: 'column'}}>
+                            <Form.Label className="none" style={{fontSize: 14, marginBottom: 0}}>RG</Form.Label>
+                            <InputMask value={rg} style={{width: 140}}  placeholder="RG" onChange={event => setRg(event.target.value)} />
+                        </div>
+                    </Form.Group>
                     <Form.Group style={{padding: 5}} controlId="formGridPassword">
                         <div style={{display: 'flex', flexDirection: 'column'}}>
                             <Form.Label className="none" style={{fontSize: 14, marginBottom: 0}}>CPF</Form.Label>
-                            <InputMask value={cpf}  style={{width: 300}} mask="999.999.999-99" placeholder="CPF" onChange={event => setCpf(event.target.value)} />
+                            <InputMask value={cpf}  style={{width: 150}} mask="999.999.999-99" placeholder="CPF" onChange={event => setCpf(event.target.value)} />
                         </div>
                     </Form.Group>
                     <Form.Group style={{padding: 5}} controlId="formGridEmail">
@@ -355,10 +395,11 @@ export default function Search () {
                     {collaborators.map(element => {
                       return (
                         <div style={{display: "flex", justifyContent: 'space-between', alignItems: 'center'}}>
-                          <ListGroup.Item style={{width: 400, fontSize: 14}}  onClick={()=> {
+                          <ListGroup.Item style={{width: 400, fontSize: 14, textTransform: 'capitalize'}}  onClick={()=> {
                             setLgShow(true)
                             setData(element)
                           }}>
+                            <Image src={element.collaborator.avatar === null ? FakeAvatar : element.collaborator.avatar} width={50} style={{marginRight: 4}} roundedCircle />
                             {element.collaborator.name}
                           </ListGroup.Item>
                         </div>

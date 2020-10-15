@@ -5,21 +5,23 @@ import Button from 'react-bootstrap/Button';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import Spinner from 'react-bootstrap/Spinner';
 import Form from 'react-bootstrap/Form'
+import FakeAvatar from '../../assets/fake.png'
+import Image from 'react-bootstrap/Image'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faUserPlus } from '@fortawesome/free-solid-svg-icons'
 import { ToastContainer, toast  } from 'react-toastify';
 import InputMask from "react-input-mask";
 import 'react-toastify/dist/ReactToastify.css';
 import api from '../../services/api';
-import {useDispatch} from 'react-redux';
 import { useHistory } from "react-router-dom";
-
+import Resizer from 'react-image-file-resizer';
 
 export default function Add () {
     const [categories, setCategories] = useState([]);
-    const dispatch = useDispatch();
     let history = useHistory()
     const [name, setName] = useState('');
+    const [avatar, setavatar] = useState(null)
+    const [profile, setProfile] = useState(null)
     const [age, setAge] = useState('');
     const [rg, setRg] = useState('');
     const [cpf, setCpf] = useState('');
@@ -72,7 +74,7 @@ export default function Add () {
         }
 
         setLoading(true);
-        await api.post('/createcollaborators', {
+        const _data = {
             name,
             age,
             rg,
@@ -90,11 +92,21 @@ export default function Add () {
             state,
             facebook,
             instagram,
+        }
+        const data_ = new FormData()
+        data_.append('file', avatar)
+        data_.append('data', JSON.stringify(_data))
+        await api.post('/createcollaborators',data_, {
+            headers: {
+                "Content-Type": `multipart/form-data; boundary=${data_._boundary}`,
+               }
         })
         .then(() => {
             toast.success("Adicionado com sucesso!");
             setLoading(false);
             setName('')
+            setavatar(null)
+            setProfile(null)
             setAge('')
             setRg('')
             setCpf('')
@@ -114,9 +126,11 @@ export default function Add () {
             toast.error("Ops, Algo deu errado!, notifique o suporte para resolver o problema!");
             setLoading(false);
             setName('')
+            setavatar(null)
             setAge('')
             setRg('')
             setCpf('')
+            setProfile(null)
             setWhatsApp('')
             setPhone('')
             setNeighborhood('')
@@ -135,6 +149,18 @@ export default function Add () {
         setDescription(event.target.value)
     }
 
+    async function handleChange(event) {
+        if (event.target.files[0] === undefined) {
+            setProfile(null)
+            return
+        }
+        setavatar(event.target.files[0])
+        Resizer.imageFileResizer(
+            event.target.files[0], 400, 400, 'JPEG', 100, 0, uri=>{
+                setProfile(uri)
+            },'base64')
+    }
+
     return (
         <div>
             <SideMenu option={'add'}/>
@@ -150,8 +176,22 @@ export default function Add () {
                         <FontAwesomeIcon icon={faUserPlus} />
                     <strong style={{marginLeft: 10}}>ADICIONAR COLABORADOR</strong>
                     </div>
-                    <Form className="tag">
-                    <Form.Row>
+                    <Form >
+                    <Form.Row style={{display: 'flex', justifyContent: 'space-between', alignItems: 'center'}}>
+                        <Form.Group controlId="formGridEmail">
+                            <Image src={profile === null ? FakeAvatar : profile} width={60} style={{marginRight: 4,}} roundedCircle />
+                        </Form.Group>
+                        <Form.Group controlId="formGridEmail">
+                            <Form.File  
+                                style={{width: 300, marginTop: 30}}
+                                id="custom-file-translate-html"
+                                label="Imagen"
+                                accept="image/*"
+                                data-browse="Procurar"
+                                custom
+                                onChange={handleChange}
+                            />
+                        </Form.Group>
                         <Form.Group style={{padding: 5}} controlId="formGridEmail">
                             <div style={{display: 'flex', flexDirection: 'column'}}>
                                 <Form.Label className="none" style={{fontSize: 14, marginBottom: 0}}>Nome</Form.Label>
@@ -162,21 +202,21 @@ export default function Add () {
                         <Form.Group style={{padding: 5}} controlId="formGridPassword">
                             <div style={{display: 'flex', flexDirection: 'column'}}>
                                 <Form.Label className="none" style={{fontSize: 14, marginBottom: 0}}>Data de nascimento</Form.Label>
-                                <Form.Control type="date" placeholder="Data de nascimento" onChange={event => setAge(event.target.value)} />
-                            </div>
-                        </Form.Group>
-                        <Form.Group style={{padding: 5}} controlId="formGridEmail">
-                            <div style={{display: 'flex', flexDirection: 'column'}}>
-                                <Form.Label className="none" style={{fontSize: 14, marginBottom: 0}}>RG</Form.Label>
-                                <InputMask placeholder="RG" onChange={event => setRg(event.target.value)} />
+                                <Form.Control style={{width: 150}} type="date" placeholder="Data de nascimento" onChange={event => setAge(event.target.value)} />
                             </div>
                         </Form.Group>
                     </Form.Row>
                     <Form.Row>
+                        <Form.Group style={{padding: 5}} controlId="formGridEmail">
+                            <div style={{display: 'flex', flexDirection: 'column'}}>
+                                <Form.Label className="none" style={{fontSize: 14, marginBottom: 0}}>RG</Form.Label>
+                                <InputMask style={{width: 140}} placeholder="RG" onChange={event => setRg(event.target.value)} />
+                            </div>
+                        </Form.Group>
                         <Form.Group style={{padding: 5}} controlId="formGridPassword">
                             <div style={{display: 'flex', flexDirection: 'column'}}>
                                 <Form.Label className="none" style={{fontSize: 14, marginBottom: 0}}>CPF</Form.Label>
-                                <InputMask mask="999.999.999-99" placeholder="CPF" onChange={event => setCpf(event.target.value)} />
+                                <InputMask style={{width: 150}} mask="999.999.999-99" placeholder="CPF" onChange={event => setCpf(event.target.value)} />
                             </div>
                         </Form.Group>
                         <Form.Group style={{padding: 5}} controlId="formGridEmail">
@@ -192,7 +232,7 @@ export default function Add () {
                         </div>
                         </Form.Group>
                     </Form.Row>
-                    <Form.Row>
+                    <Form.Row >
                         <Form.Group style={{padding: 5}} controlId="formGridPassword">
                             <Form.Label className="none" style={{fontSize: 14, marginBottom: 0}}>Bairro</Form.Label>
                             <Form.Control type="text" placeholder="Bairro" onChange={event => setNeighborhood(event.target.value)} />
@@ -209,7 +249,7 @@ export default function Add () {
                             </div>
                         </Form.Group>
                     </Form.Row>
-                    <Form.Row>
+                    <Form.Row >
                     <Form.Group style={{padding: 5}} controlId="formGridEmail">
                         <Form.Label className="none" style={{fontSize: 14, marginBottom: 0}}>Complemento</Form.Label>
                             <Form.Control type="text" placeholder="Complemento" onChange={event => setComplement(event.target.value)} />
@@ -236,7 +276,7 @@ export default function Add () {
                             </div>
                         </Form.Group>
                     </Form.Row>
-                    <Form.Row>
+                    <Form.Row >
                         <Form.Group style={{padding: 5}} controlId="formGridEmail">
                             <Form.Label className="none" style={{fontSize: 14, marginBottom: 0}}>FaceBook</Form.Label>
                             <Form.Control type="url" placeholder="Link" onChange={event => setFacebook(event.target.value)} />
