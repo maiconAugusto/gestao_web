@@ -10,7 +10,8 @@ import Setup from './pages/setup/index';
 import Password from './pages/password/password';
 import Avanced from './pages/avanced/avanced';
 import List from './pages/list/list';
-
+import Payment from './pages/payment/index'
+import ListPayment from './pages/paymentCollaborators';
 
 export default function Routes () {
     return (
@@ -25,6 +26,8 @@ export default function Routes () {
                 <Route path="/password" component={Password} isPrivate />
                 <Route path="/avanced" component={Avanced} isPrivate />
                 <Route path="/list" component={List} isPrivate />
+                <Route path="/payment" component={Payment} isPrivate />
+                <Route path="/list-payment" component={ListPayment} isPrivate />
             </Switch>
         </BrowserRouter>
     );

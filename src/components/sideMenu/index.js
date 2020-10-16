@@ -2,7 +2,7 @@ import React from 'react';
 import SideNav, { NavItem, NavIcon, NavText } from '@trendmicro/react-sidenav';
 import '@trendmicro/react-sidenav/dist/react-sidenav.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import { faHome, faCog, faUserPlus, faUserTimes, faSearch, faList } from '@fortawesome/free-solid-svg-icons'
+import { faHome, faCog, faUserPlus, faUserTimes, faSearch, faList, faMoneyBillWave } from '@fortawesome/free-solid-svg-icons'
 import { useHistory } from "react-router-dom";
 
 export default function SideMenu (props) {
@@ -29,6 +29,25 @@ export default function SideMenu (props) {
                         Home
                     </NavText>
                 </NavItem>
+                <NavItem eventKey="finance">
+                    <NavIcon>
+                        <FontAwesomeIcon icon={faMoneyBillWave} />
+                    </NavIcon>
+                    <NavText>
+                        Financeiro
+                    </NavText>
+                    <NavItem eventKey="payment">
+                        <NavText>
+                            Registrar pagamanto
+                        </NavText>  
+                    </NavItem>
+                    <NavItem eventKey="list-payment">
+                        <NavText>
+                            Histórico de pagamentos
+                        </NavText>  
+                    </NavItem>
+                </NavItem>
+
                 <NavItem eventKey="add">
                     <NavIcon>
                         <FontAwesomeIcon icon={faUserPlus} />

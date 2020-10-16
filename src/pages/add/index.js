@@ -185,7 +185,7 @@ export default function Add () {
                                 <div>
                                     <div style={{display: 'flex', flexDirection: 'column'}}>
                                     <div style={{display: 'flex', alignItems: 'center'}}>
-                                        <Avatar name="Foo Bar" size={50} round={true} src={profile === null ? FakeAvatar : profile} style={{marginRight: 4, marginTop: 20}} />
+                                        <Avatar name="Avatar" size={50} round={true} src={profile === null ? FakeAvatar : profile} style={{marginRight: 4, marginTop: 20}} />
                                         <Form.File  
                                             style={{width: 250, marginTop: 25}}
                                             id="custom-file-translate-html"

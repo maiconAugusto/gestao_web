@@ -103,6 +103,7 @@ export default function List () {
                 if (response.data.data.length === 0) {
                     toast.warning("Não encontramos resultados")
                 }
+                console.log(response.data.data)
                 let list = response.data.data;
                 list.sort(function(a,b) {
                     return a.collaborator.name < b.collaborator.name ? -1 : a.collaborator.name > b.collaborator.name ? 1 : 0;
