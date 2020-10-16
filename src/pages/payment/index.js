@@ -123,7 +123,7 @@ export default function Payment () {
                       <Button style={{marginTop: 20, marginRight: 10, fontSize: 14}} onClick={()=> {
                         setLgShow(false)
                         setData({collaborator: ''})
-                      }} variant="danger" >
+                      }} variant="outline-danger" >
                         Fechar
                       </Button>
                     </div>

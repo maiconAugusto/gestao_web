@@ -402,8 +402,8 @@ export default function Search () {
                 <ListGroup style={{width: 400, marginTop: 20}}>
                     {collaborators.map(element => {
                       return (
-                        <div style={{display: "flex", justifyContent: 'space-between', alignItems: 'center'}}>
-                          <ListGroup.Item style={{width: 400, fontSize: 14, textTransform: 'capitalize'}}  onClick={()=> {
+                        <div className="fx" style={{display: "flex", justifyContent: 'space-between', alignItems: 'center'}}>
+                          <ListGroup.Item  style={{width: 400, fontSize: 14, textTransform: 'capitalize'}}  onClick={()=> {
                             setLgShow(true)
                             setData(element)
                           }}>

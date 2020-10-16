@@ -11,6 +11,9 @@ export const Container = styled.div`
         border: 1px solid #dfdfdf; 
         margin-top: 2px;
     }
+    .fx :hover {
+        background-color: #F6F6F6;
+    }
 `
 export const Button = styled.button`
     width: 400px;

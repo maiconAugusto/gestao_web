@@ -9,15 +9,17 @@ export const Container = styled.form`
 
     @media (max-width: 700px) 
     {
-    .tag
-        {
-            margin-left: 70px;
+        .tag
+            {
+                margin-left: 70px;
+            }
+            div {
+            width: 300px;
         }
-        div {
-        width: 300px;
     }
+    .fx :hover {
+        background-color: #F6F6F6;
     }
-
     input {
         width: 400px;
         height: 34px;

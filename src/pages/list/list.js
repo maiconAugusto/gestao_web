@@ -191,7 +191,7 @@ export default function List () {
                         <small style={{marginLeft: 8}}>Carregando...</small>
                     </div>
                 ) : (
-                    <div style={{display: 'flex', height: 100, flexWrap: 'wrap'}}>
+                    <div className="fx" style={{display: 'flex', height: 100, flexWrap: 'wrap'}}>
                         {categories.map(element => {
                         return (
                             <div class="border" style={{display: 'flex', flexDirection: 'row', height: 50, width: 150, alignItems: 'center', justifyContent: 'flex-start'}}>
@@ -217,33 +217,33 @@ export default function List () {
             <Lists style={{width: 600}}>
                 {list.map(element => {
                     return (
-                        <div className="list">
-                        <ListItem onClick={()=> {
-                            setData(element)
-                            setLgShow(true)
-                        }} alignItems="flex-start">
-                            <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
-                                <Avatar name={element.collaborator.name} size={60} round={true} src={element.collaborator.avatar === null ? FakeAvatar : element.collaborator.avatar} style={{marginRight: 4}} />
-                                <div style={{display: 'flex', flexDirection: 'column'}}>
-                                    <Typography
-                                        component="span"
-                                        variant="body2"
-                                        color="textPrimary"
-                                        style={{textTransform: 'capitalize', fontSize: 14}}
-                                    >
-                                        {element.collaborator.name}
-                                    </Typography>
-                                    <Typography
-                                        component="span"
-                                        variant="body2"
-                                        color="textPrimary"
-                                        style={{textTransform: 'capitalize', fontSize: 12}}
-                                    >
-                                        {element.categories}
-                                    </Typography>
+                        <div className="list fx">
+                            <ListItem onClick={()=> {
+                                setData(element)
+                                setLgShow(true)
+                            }} alignItems="flex-start">
+                                <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
+                                    <Avatar name={element.collaborator.name} size={60} round={true} src={element.collaborator.avatar === null ? FakeAvatar : element.collaborator.avatar} style={{marginRight: 4}} />
+                                    <div style={{display: 'flex', flexDirection: 'column'}}>
+                                        <Typography
+                                            component="span"
+                                            variant="body2"
+                                            color="textPrimary"
+                                            style={{textTransform: 'capitalize', fontSize: 14}}
+                                        >
+                                            {element.collaborator.name}
+                                        </Typography>
+                                        <Typography
+                                            component="span"
+                                            variant="body2"
+                                            color="textPrimary"
+                                            style={{textTransform: 'capitalize', fontSize: 12}}
+                                        >
+                                            {element.categories}
+                                        </Typography>
+                                    </div>
                                 </div>
-                            </div>
-                        </ListItem>
+                            </ListItem>
                         </div>
                     )
                 })}
