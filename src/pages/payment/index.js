@@ -17,6 +17,7 @@ import CurrencyInput from 'react-currency-masked-input'
 import { useHistory } from "react-router-dom";
 import FakeAvatar from '../../assets/fake.png'
 import Avatar from 'react-avatar';
+import Typography from '@material-ui/core/Typography';
 
 export default function Payment () {
     let history = useHistory()
@@ -148,8 +149,25 @@ export default function Payment () {
                             setLgShow(true)
                             setData(element)
                           }}>
-                            <Avatar name={element.collaborator.name} size={50} round={true} src={element.collaborator.avatar === null ? FakeAvatar : element.collaborator.avatar} style={{marginRight: 4}} />
-                            {element.collaborator.name}
+                            <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center'}}>
+                              <Avatar name={element.collaborator.name} size={50} round={true} src={element.collaborator.avatar === null ? FakeAvatar : element.collaborator.avatar} style={{marginRight: 4}} />
+                              <div style={{display: 'flex', flexDirection: 'column'}}>
+                                <Typography
+                                    component="span"
+                                    variant="body2"
+                                    color="textPrimary"
+                                    style={{textTransform: 'capitalize', fontSize: 14}}>
+                                    {element.collaborator.name}
+                                </Typography>
+                                <Typography
+                                    component="span"
+                                    variant="body2"
+                                    color="textPrimary"
+                                    style={{textTransform: 'capitalize', fontSize: 12}}>
+                                    {element.categories}
+                                </Typography>
+                              </div>
+                            </div>
                           </ListGroup.Item>
                         </div>
                       )
