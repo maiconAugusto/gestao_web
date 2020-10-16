@@ -92,7 +92,7 @@ export default function ListPayment () {
                         <div className="list">
                         <ListItem alignItems="flex-start">
                             <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center', width: '100%'}}>
-                                <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center', width: '60%'}}>
+                                <div style={{display: 'flex', flexDirection: 'row', alignItems: 'center', width: '50%'}}>
                                     <Avatar name={element.name} size={60} round={true} src={element.avatar === null ? FakeAvatar : element.avatar} style={{marginRight: 4}} />
                                     <div style={{display: 'flex', flexDirection: 'column'}}>
                                         <Typography
@@ -104,17 +104,19 @@ export default function ListPayment () {
                                         </Typography>
                                     </div>
                                 </div>
-                                <div style={{display: 'flex', flexDirection: 'column', width: '40%', alignItems: 'flex-end'}}>
+                                <div style={{display: 'flex', flexDirection: 'column', width: '50%', alignItems: 'flex-end'}}>
                                     {element.payments.map(el => {
                                         return (
-                                            <div style={{display: 'row', justifyContent: 'space-around'}}>
-                                                <small style={{marginRight: 10}}>Data: {handleDate(el.date)}</small>
-                                                <small>Valor: {el.price}</small>
+                                            <div style={{display: 'flex', justifyContent: 'space-around', width: '100%'}}>
+                                                <div style={{display: 'flex', flexDirection: 'row' ,justifyContent: 'space-between', width: '80%'}}>
+                                                    <small style={{marginRight: 10}}>Data: {handleDate(el.date)}</small>
+                                                    <small>Valor: {el.price}</small>
+                                                </div>
                                                 <DeleteIcon style={{height: 18, marginBottom: 4, marginLeft: 5}} color="secondary" onClick={()=> removePayment(el.id)} />
                                             </div>
                                         )
                                     })}
-                                    <small style={{fontWeight: 'bold', marginTop: 10, color: '#216B0C', marginRight: 6}}>Valor Total: {element.payments.reduce(function (acumulador, valorAtual) {
+                                    <small style={{fontWeight: 'bold', marginTop: 10, color: '#216B0C', marginRight: 12}}>Valor Total: {element.payments.reduce(function (acumulador, valorAtual) {
                                         return acumulador + parseFloat(valorAtual.price);
                                     },0).toFixed(2)}</small>
                                 </div>

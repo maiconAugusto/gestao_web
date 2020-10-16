@@ -221,13 +221,19 @@ export default function Search () {
         )
     }
     async function handleChange(event) {
+      console.log(event.target.files[0])
       if (event.target.files[0] === undefined) {
           return
+      }
+      if (event.target.files[0].size >= 321044) {
+        toast.warn("A imagem selecionada é muito grande, selecione outra ou redimensione ela!")
+        return
       }
       setavatar(event.target.files[0])
       Resizer.imageFileResizer(
           event.target.files[0], 300, 300, 'JPEG', 100, 0, uri=>{
               setProfile(uri)
+              console.log(uri)
           },'base64')
   }
     function EditaUser () {
