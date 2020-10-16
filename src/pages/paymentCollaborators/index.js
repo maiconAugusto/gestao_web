@@ -14,6 +14,7 @@ import Typography from '@material-ui/core/Typography';
 import FakeAvatar from '../../assets/fake.png'
 import { useHistory } from "react-router-dom";
 import Avatar from 'react-avatar';
+import DeleteIcon from '@material-ui/icons/Delete';
 
 export default function ListPayment () {
     let history = useHistory();
@@ -62,6 +63,14 @@ export default function ListPayment () {
         return `${newData[2]}/${newData[1]}/${newData[0]}`
     }
 
+    async function removePayment (id) {
+        const response = await api.put(`/delete-payment/${id}`)
+        if (response.status === 200) {
+            toast.success(`${response.data.data}`)
+            getList()
+        }
+    }
+
     return (
         <Container>
              <div style={{height: '100vh', position: 'fixed', left: 0, top: 0}}>
@@ -101,10 +110,11 @@ export default function ListPayment () {
                                             <div style={{display: 'row', justifyContent: 'space-around'}}>
                                                 <small style={{marginRight: 10}}>Data: {handleDate(el.date)}</small>
                                                 <small>Valor: {el.price}</small>
+                                                <DeleteIcon style={{height: 18, marginBottom: 4, marginLeft: 5}} color="secondary" onClick={()=> removePayment(el.id)} />
                                             </div>
                                         )
                                     })}
-                                    <small style={{fontWeight: 'bold', marginTop: 10, color: '#216B0C'}}>Valor Total: {element.payments.reduce(function (acumulador, valorAtual) {
+                                    <small style={{fontWeight: 'bold', marginTop: 10, color: '#216B0C', marginRight: 6}}>Valor Total: {element.payments.reduce(function (acumulador, valorAtual) {
                                         return acumulador + parseFloat(valorAtual.price);
                                     },0).toFixed(2)}</small>
                                 </div>

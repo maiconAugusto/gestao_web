@@ -116,9 +116,17 @@ export default function Payment () {
                       <small style={{marginLeft: 8}}>Salvando...</small>
                     </div>
                   ) : (
-                    <Button style={{marginTop: 20, marginRight: 30}} onClick={()=> sendApi()} variant="success" >
-                      Salvar
-                    </Button>
+                    <div>
+                      <Button style={{marginTop: 20, marginRight: 10, fontSize: 14}} onClick={()=> sendApi()} variant="success" >
+                        Salvar
+                      </Button>
+                      <Button style={{marginTop: 20, marginRight: 10, fontSize: 14}} onClick={()=> {
+                        setLgShow(false)
+                        setData({collaborator: ''})
+                      }} variant="danger" >
+                        Fechar
+                      </Button>
+                    </div>
                   )}
                 </div>
             </Modal.Body>
