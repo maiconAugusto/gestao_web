@@ -209,10 +209,10 @@ export default function Search () {
                     <small style={{textTransform: 'capitalize'}}>Descrição:</small>
                     <Form.Control value={data.collaborator.description === '' ? 'Não informado' : data.collaborator.description} style={{width: 700, fontSize: 12}} as="textarea" rows="5"  /> 
                     <br/>
-                    <small>Facebook: {data.collaborator.facebook === '' ? 'Não informado' : (
+                    <small>Facebook: {data.collaborator.facebook === '' ? 'Não tem' : (
                       <a target="_blank" href={data.collaborator.facebook}>click</a>
                     )}</small>
-                    <small>Instagran: {data.collaborator.instagram === '' ? 'Não informado' : (
+                    <small>Instagran: {data.collaborator.instagram === '' ? 'Não tem' : (
                       <a target="_blank" href={data.collaborator.instagram}>click</a>
                     )}</small>
                 </div>
@@ -221,7 +221,6 @@ export default function Search () {
         )
     }
     async function handleChange(event) {
-      console.log(event.target.files[0])
       if (event.target.files[0] === undefined) {
           return
       }
@@ -231,9 +230,8 @@ export default function Search () {
       }
       setavatar(event.target.files[0])
       Resizer.imageFileResizer(
-          event.target.files[0], 300, 300, 'JPEG', 100, 0, uri=>{
+          event.target.files[0], 400, 400, 'JPEG', 100, 0, (uri, erro)=>{
               setProfile(uri)
-              console.log(uri)
           },'base64')
   }
     function EditaUser () {
